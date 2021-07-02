@@ -1,0 +1,73 @@
+endpoint_add_tcp "0.0.0.0:30120"
+endpoint_add_udp "0.0.0.0:30120"
+add_ace resource.dcrp-base command.sets allow
+
+setr ea_LanguageName "en"                # set our language to english
+setr ea_MenuButton "207"			# set our menu button to pagedown. default: "289"
+setr ea_alwaysShowButtons "false"	# we don't want to see buttons we can't even access, do we? default: "false"
+set ea_moderationNotification "true"   # this can be either "false" or a discord webhook address, this will send a discord message if an admin takes actions against a player  ( such as banning and kicking )
+set ea_custombanlist "false"            # read docs for this, dont touch it
+set ea_enableCallAdminCommand "true" # enables "calladmin" command via webhook
+set ea_enableReportCommand "true" # enables "report" command, see Configuration Wiki Page for More infos
+add_ace group.admin easyadmin allow
+
+add_ace resource.dcrp-admin command.sets allow
+add_ace resource.dcrp-admin command.add_principal allow
+add_ace resource.dcrp-admin command.add_ace allow
+
+add_ace resource.dcrp-base command.sets allow
+add_ace resource.dcrp-base command.add_principal allow
+add_ace resource.dcrp-base command.add_ace allow
+add_ace resource.dcrp-core command.add_ace allow
+add_ace resource.dcrp-core command.add_principal allow
+add_ace resource.dcrp-core command.stop allow
+#add_principal identifier.steam:000000 group.admin
+add_ace group.admin command allow # allow all commands
+add_ace group.admin command.quit deny # but don't allow quit
+add_principal identifier.fivem:1 group.admin # add the admin to the group
+
+add_principal group.admin group.user
+add_ace resource.dcrp-core command.add_ace allow
+add_ace resource.dcrp-core command.add_principal allow
+add_ace resource.dcrp-core command.remove_principal allow
+add_ace resource.dcrp-core command.stop allow
+
+add_principal identifier.steam:CHANGE group.admin 
+add_principal identifier.steam:11000013ce90d91 group.admin 				#me
+add_principal identifier.steam:11000013ce90d91 group.superadmin			#me
+add_principal identifier.steam:110000139b20798 group.superadmin         #chikarada
+add_principal identifier.steam:11000013cfee62e group.superadmin         #god
+add_principal identifier.steam:1100001363dcb9a group.admin              #blacki
+add_principal identifier.steam:11000013eac3e3d group.admin              #addu
+
+#set sv_enforceGameBuild 2060
+set es_enableCustomData 1
+set mysql_connection_string "server=127.0.0.1;database=leakhq;userid=root"
+sv_scriptHookAllowed 0
+set sv_displayqueue true
+sets Discord "https://discord.gg/GVhkrVGXGs"
+sets Website "Coming Soon"
+sets Microphone "Required"
+sets Age Limit "18+ Required"
+sets Roleplay "Serious RP"
+sets Developers "SYCO,SNIPPY,CHIKARA,BONG"
+sets tags "India, nopixel, not coming soon, dcrp"
+sets locale "en-IND, Hindi, Bengali, english" 
+sv_hostname "^2Dark City  Roleplay AL | ^6Active Staff & development | ^3India-pakistan-bangladesh Always welcome | ^4High FPS | ^2Gangs | ^3Real Estate | ^2 https://discord.gg/2CB4tfY8ZW "
+sets sv_projectName "^2Dark City  Roleplay WL | ^6Active Staff & development | ^3India-pakistan-bangladesh Always welcome | ^4High FPS | ^2Gangs | ^3Real Estate"
+sets sv_projectDesc "India, nopixel, not coming soon"
+exec resource.cfg
+load_server_icon DCRP_LL.png
+set temp_convar "hey world!"
+add_ace group.admin command allow # allow all commands
+add_ace group.admin command.quit deny # but don't allow quit
+add_principal identifier.fivem:1 group.admin # add the admin to the group
+sv_endpointprivacy true
+sv_maxclients 32
+
+# Steam Web API key, if you want to use Steam authentication (https://steamcommunity.com/dev/apikey)
+# -> replace "" with the key
+set steam_webApiKey "879616E21745B287EC66C67F1827D2D9"
+
+# License key for your server (https://keymaster.fivem.net)
+sv_licenseKey "5vh9ou1ogxo0ou60icqkj6v3xal0a0ca"

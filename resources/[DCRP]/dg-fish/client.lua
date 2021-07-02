@@ -1,0 +1,354 @@
+DGCore = nil
+Citizen.CreateThread(function()
+    while DGCore == nil do
+        TriggerEvent('dg:getSharedObject', function(obj) DGCore = obj end)
+        Citizen.Wait(0)
+    end
+end)
+local isFishing = false
+local inZone = false
+local cancel = false
+local veh = 0
+local canSpawn = true
+local zones = {
+    'OCEANA',
+    'ELYSIAN',
+    'CYPRE',
+    'DELSOL',
+    'LAGO',
+    'ZANCUDO',
+    'ALAMO',
+    'NCHU',
+    'CCREAK',
+    'PALCOV',
+    'PALETO',
+    'PROCOB',
+    'ELGORL',
+    'SANCHIA',
+    'PALHIGH',
+    'DELBE',
+    'PBLUFF',
+    'SANDY',
+    'GRAPES',
+}
+
+local commonItems = {'freshwatereel','hilsa'}
+local middleItems = {'bonito','bassfish'}
+local rareItems = {'starfish','squid'}
+local superItems = {'oceanshell'}
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        local plyCords = GetEntityCoords(PlayerPedId())
+        -- local dis = GetDistanceBetweenCoords(plyCords, -1846.707, -1190.704, 14.32304, true) 
+        -- if dis <= 5 then
+        --     DrawText3Ds(-1846.707, -1190.704, 14.32304,'[E] Sell Fish')
+        --     if IsControlJustReleased(0, 38) then
+        --         local finished = exports["dg-taskbar"]:taskBar(2000,"Selling Fish",true,false,playerVeh)
+        --         if finished == 100 then
+        --             SellItems()
+        --         end
+        --     end
+        -- end
+        local dis3 = GetDistanceBetweenCoords(plyCords, -3424.41, 982.81, 8.43, true) 
+        if dis3 <= 5 and veh == 0 then
+            DrawText3Ds(-3424.41, 982.81, 8.43, '[E] Rent A Boat') 
+            if IsControlJustReleased(0, 38) then
+                if canSpawn == true then
+                    if DGCore.GetPlayerData().money >= 500 then
+                    TriggerServerEvent('fish:checkAndTakeDepo')
+                    Citizen.Wait(500)
+                        canSpawn = false
+                        DGCore.Game.SpawnVehicle('marquis', vector3(-3448.48, 971.98, 1.91), 45, function(vehicle) 
+                            veh = vehicle
+                            SetEntityAsMissionEntity(veh, true, true)
+                            TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
+                            TriggerServerEvent('garage:addKeys', GetVehicleNumberPlateText(veh))
+                        end)
+                    elseif DGCore.GetPlayerData().money < 500 then
+                        TriggerEvent('DoLongHudText', 'You cant afford the Deposit!', 2)
+                    end
+                else
+                    TriggerEvent('DoLongHudText', 'Vehicle is already out!', 2)
+                end
+            end
+        elseif dis3 <= 20 and veh ~= 0 then
+            DrawText3Ds(-3424.41, 982.81, 8.43,'[E] Return the Boat (Reward $500)') 
+            if IsControlJustReleased(0, 38) then
+                DeleteVehicle(veh)
+                veh = 0
+                TriggerEvent('DoLongHudText', 'Vehicle Returned and your Deposit was Refunded!', 1)
+                TriggerServerEvent('fish:returnDepo')
+                SetEntityCoords(GetPlayerPed(-1), -3424.41, 982.81, 8.43)
+                Citizen.Wait(2000)
+                canSpawn = true
+            end
+        end
+        local dis4 = GetDistanceBetweenCoords(plyCords, 1308.91, 4362.29, 41.55, true) 
+        local dis2 = GetDistanceBetweenCoords(plyCords, 1302.839, 4225.832, 33.9087, true) 
+        if dis4 <= 5 and veh == 0 then
+            DrawText3Ds(1308.91, 4362.29, 41.55, '[E] Rent A Boat') -- need to change
+            if IsControlJustReleased(0, 38) then
+                if canSpawn == true then
+                    if DGCore.GetPlayerData().money >= 500 then
+                    TriggerServerEvent('fish:checkAndTakeDepo')
+                    Citizen.Wait(500)
+                        canSpawn = false
+                        DGCore.Game.SpawnVehicle('suntrap', vector3(1299.69, 4194.82, 30.91), 45, function(vehicle) 
+                            veh = vehicle
+                            SetEntityAsMissionEntity(veh, true, true)
+                            TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
+                            TriggerServerEvent('garage:addKeys', GetVehicleNumberPlateText(veh))
+                        end)
+                    elseif DGCore.GetPlayerData().money < 500 then
+                        TriggerEvent('DoLongHudText', 'You cant afford the Deposit!', 2)
+                    end
+                else
+                    TriggerEvent('DoLongHudText', 'Vehicle is already out!', 2)
+                end
+            end
+        elseif dis2 <= 20 and veh ~= 0 then
+            DrawText3Ds(1302.839, 4225.832, 33.9087,'[E] Return the Boat (Reward $500)') 
+            if IsControlJustReleased(0, 38) then
+                DeleteVehicle(veh)
+                veh = 0
+                TriggerEvent('DoLongHudText', 'Vehicle Returned and your Deposit was Refunded!', 1)
+                TriggerServerEvent('fish:returnDepo')
+                SetEntityCoords(GetPlayerPed(-1), 1302.839, 4225.832, 33.9087)
+                Citizen.Wait(2000)
+                canSpawn = true
+            end
+        end
+        local dis5 = GetDistanceBetweenCoords(plyCords, 3807.98, 4478.62, 6.37, true) 
+        local dis6 = GetDistanceBetweenCoords(plyCords, 3865.944, 4463.568, 2.73844, true) 
+        if dis5 <= 5 and veh == 0 then
+            DrawText3Ds(3807.98, 4478.62, 6.37, '[E] Rent A Boat') 
+            if IsControlJustReleased(0, 38) then
+                if canSpawn == true then
+                    if DGCore.GetPlayerData().money >= 500 then
+                    TriggerServerEvent('fish:checkAndTakeDepo')
+                    Citizen.Wait(500)
+                        canSpawn = false
+                        DGCore.Game.SpawnVehicle('tropic', vector3(3865.89, 4476.66, 1.53), 45, function(vehicle) 
+                            veh = vehicle
+                            SetEntityAsMissionEntity(veh, true, true)
+                            TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
+                            TriggerServerEvent('garage:addKeys', GetVehicleNumberPlateText(veh))
+                        end)
+                    elseif DGCore.GetPlayerData().money < 500 then
+                        TriggerEvent('DoLongHudText', 'You cant afford the Deposit!', 2)
+                    end
+                else
+                    TriggerEvent('DoLongHudText', 'Vehicle is already out!', 2)
+                end
+            end
+        elseif dis6 <= 20 and veh ~= 0 then
+            DrawText3Ds(3865.944, 4463.568, 2.73844,'[E] Return the Boat (Reward $500)') 
+            if IsControlJustReleased(0, 38) then
+                DeleteVehicle(veh)
+                veh = 0
+                TriggerEvent('DoLongHudText', 'Vehicle Returned and your Deposit was Refunded!', 1)
+                TriggerServerEvent('fish:returnDepo')
+                SetEntityCoords(GetPlayerPed(-1), 3865.944, 4463.568, 2.73844)
+                Citizen.Wait(2000)
+                canSpawn = true
+            end
+        end
+    end
+end)
+--- suntrap tropic marquis
+
+RegisterNetEvent('dg-fish:lego')
+AddEventHandler('dg-fish:lego', function()
+    if isFishing == false then
+        StartFish()
+    elseif isFishing == true then
+        TriggerEvent('DoLongHudText', 'You are already fishing dingus.', 2)
+    end
+end)
+
+function checkZone()
+    local ply = PlayerPedId()
+    local coords = GetEntityCoords(ply)
+    local currZone = GetNameOfZone(coords)
+    for k,v in pairs(zones) do
+        if currZone == v then
+            inZone = true
+            break
+        else
+            inZone = false
+        end
+    end
+    
+end
+
+function StartFish()
+    local ply = PlayerPedId()
+    local onBoat = false
+    local function GetEntityBelow()
+        local Ent = nil
+        local CoA = GetEntityCoords(ply, 1)
+        local CoB = GetOffsetFromEntityInWorldCoords(ply, 0.0, 0.0, 5.0)
+        local RayHandle = CastRayPointToPoint(CoA.x, CoA.y, CoA.z, CoB.x, CoB.y, CoB.z, 10, ply, 0)
+        local A,B,C,D,Ent = GetRaycastResult(RayHandle)
+        return Ent
+    end
+    local boat = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 10.000, 0, 12294)
+    checkZone()
+    Citizen.Wait(250)
+    if IsEntityInWater(boat) and IsPedSwimming(ply) == false and inZone == true then
+        if exports["dg-inventory"]:hasEnoughOfItem('fishingrod',1,false) then
+            isFishing = true
+            cancel = false
+            Fish()
+        end
+    elseif IsEntityInWater(ply) and IsPedSwimming(ply) == false and inZone == true then 
+        if exports["dg-inventory"]:hasEnoughOfItem('fishingrod',1,false) then
+            isFishing = true
+            cancel = false
+            Fish()
+        end
+    end
+end  
+
+
+function Fish()
+    if cancel == false then
+        local ply = PlayerPedId()
+       --playerAnim() 
+        TaskStartScenarioInPlace(ply, 'WORLD_HUMAN_STAND_FISHING', 0, true)
+        timer = math.random(10000,30000)
+        Citizen.Wait(timer)
+        Catch()
+    end
+end
+
+function Repeat()
+    timer = math.random(10000,30000)
+    if cancel == false then
+        Citizen.Wait(timer)
+        Catch()
+    end
+end
+
+function Catch()
+    if cancel == false then
+        local ply = PlayerPedId()
+        TriggerEvent('DoLongHudText', 'There is a fish on the line.', 1)
+        local finished = exports["dg-taskbarskill"]:taskBar(2000,math.random(7,14))
+        if finished == 100 then
+            isFishing = false
+            local rdn = math.random(1,100)
+            if rdn <= 10 then
+                TriggerEvent("inventory:removeItem", "fishingrod", 1)
+                SetCurrentPedWeapon(ply, `WEAPON_UNARMED`, true)
+                ClearPedTasksImmediately(ply)
+            elseif rdn > 11 then
+                --TriggerServerEvent('dg-fish:getFish')
+                -- local rewardChance = math.random(1,10)
+                -- if rewardChance <= 1 then
+                --     TriggerEvent("player:receiveItem", 'swood', 1)
+                --     TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                -- elseif rewardChance > 1  and rewardChance < 3 then
+                --     TriggerEvent("player:receiveItem", 'pwood', 5)
+                --     TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                -- elseif rewardChance > 3 and rewardChance < 5 then
+                --     TriggerEvent("player:receiveItem", 'owood', 5)
+                --     TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                -- elseif rewardChance > 5 and rewardChance <= 7 then
+                --     TriggerEvent("player:receiveItem", 'bwood', 10)
+                --     TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                -- elseif rewardChance > 7 and rewardChance <= 10 then
+                --     TriggerEvent("player:receiveItem", 'twood', 10)
+                --     TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                -- end
+                TriggerEvent('DoLongHudText', 'You caught a Fish!', 1)
+                if math.random(1,100) < 50 then
+                    give('common')
+                elseif math.random(1,100) > 50 and math.random(1,100) < 70 then
+                    give('middle')
+                elseif math.random(1,100) > 70 and math.random(1,100) < 90 then
+                    give('rare')
+                elseif math.random(1,100) > 90 then
+                    give('super')
+                else
+                    give('common')
+                end
+                SetCurrentPedWeapon(ply, `WEAPON_UNARMED`, true)
+                ClearPedTasksImmediately(ply)
+            end
+        elseif finished ~= 100 then
+            TriggerEvent('DoLongHudText', 'The fish got away.', 2)
+            Repeat()
+        else
+            isFishing = false
+        end
+    end
+end
+
+function give(type)
+    local dropi = 1
+    if type == 'common' then
+		dropi = math.random(1, #commonItems)
+		TriggerEvent('player:receiveItem', commonItems[dropi] , 1)
+    elseif type == 'middle' then
+        dropi = math.random(1, #middleItems)
+        TriggerEvent('player:receiveItem', middleItems[dropi] , 1)
+    elseif type == 'rare' then
+        dropi = math.random(1, #rareItems)
+        TriggerEvent('player:receiveItem', rareItems[dropi] , 1)
+    elseif type == 'super' then 
+        dropi = math.random(1, #superItems)
+        TriggerEvent('player:receiveItem', superItems[dropi] , 1)
+    end
+end
+
+
+function DrawText3Ds(x,y,z, text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+
+    SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(_x,_y)
+    local factor = (string.len(text)) / 370
+    DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
+end
+
+-- function SellItems()
+--     local sellfish = math.random(40, 80)
+--         if exports["dg-inventory"]:hasEnoughOfItem("fish",2,false) then 
+--         TriggerEvent("inventory:removeItem", "fish", 2)
+--         TriggerEvent('OpenInv')
+--         TriggerServerEvent('dg-fish:payShit', sellfish)
+--     else
+--         TriggerEvent('DoLongHudText', 'You dont have enough fish in your pockets to sell!', 2)
+--     end
+-- end
+
+local blips = {
+    {title="Boat Rental", colour=4, id=427, scale=0.7, x = -3424.41, y = 982.81, z = 8.43},
+    {title="Boat Rental", colour=4, id=427, scale=0.7, x = 1308.91, y = 4362.29, z = 41.55},
+    {title="Boat Rental", colour=4, id=427, scale=0.7, x = 3807.98, y = 4478.62, z = 6.37},
+    {title="Pearls Seafood Restaurant", colour=48, id=267, scale=0.6, x = -1846.707, y = -1190.704, z = 14.32304},
+ }
+     
+Citizen.CreateThread(function()
+   for _, info in pairs(blips) do
+     info.blip = AddBlipForCoord(info.x, info.y, info.z)
+     SetBlipSprite(info.blip, info.id)
+     SetBlipDisplay(info.blip, 4)
+     SetBlipScale(info.blip, info.scale)
+     SetBlipColour(info.blip, info.colour)
+     SetBlipAsShortRange(info.blip, true)
+     BeginTextCommandSetBlipName("STRING")
+     AddTextComponentString(info.title)
+     EndTextCommandSetBlipName(info.blip)
+   end
+end)
