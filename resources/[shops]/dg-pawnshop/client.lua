@@ -267,3 +267,23 @@ function ValuableShop()
   end)
   
 end
+
+
+local picture_ped
+Citizen.CreateThread(function()
+
+    local hashkey = GetHashKey("csb_oscar")
+
+	RequestModel(hashkey)
+	while not HasModelLoaded(hashkey) do Wait(1) end
+
+	picture_ped = CreatePed(1, hashkey, 1538.62, 3595.707, 38.76654, 209.16586303711, false, true)
+	SetBlockingOfNonTemporaryEvents(picture_ped, true)
+	SetPedDiesWhenInjured(picture_ped, false)
+	SetPedCanPlayAmbientAnims(picture_ped, true)
+	SetPedCanRagdollFromPlayerImpact(picture_ped, false)
+	SetEntityInvincible(picture_ped, true)
+	FreezeEntityPosition(picture_ped, true)
+  --TaskStartScenarioInPlace(picture_ped, 'weed', 0, true);
+
+end)
