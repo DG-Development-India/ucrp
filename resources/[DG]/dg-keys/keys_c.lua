@@ -421,7 +421,6 @@ AddEventHandler('garageadd:giveKey', function(args, source)
   end
 end)
 
-
 RegisterNetEvent('hotwire:giveKey')
 AddEventHandler('hotwire:giveKey', function(args, source)
   local coordA = GetEntityCoords(GetPlayerPed(-1), 1)
@@ -675,17 +674,18 @@ Citizen.CreateThread(function()
     local playerPed = GetPlayerPed(-1)
     local vehicle = GetVehiclePedIsIn(playerPed)
     local plate = GetVehicleNumberPlateText(vehicle)
-    if IsControlJustPressed(1, 244) and IsPedInAnyVehicle(PlayerPedId(), false) then
+    --if IsControlJustPressed(1, 244) and IsPedInAnyVehicle(PlayerPedId(), false) then
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
       if vehicleKeys[plate] == nil then
         DGCore.TriggerServerCallback('dg-keys:checkOwner', function(owner)
           if owner then
-            exports["dg-taskbar"]:taskBar(3000, "Taking Keys")
+            --exports["dg-taskbar"]:taskBar(3000, "Taking Keys")
               vehicleKeys[plate] = {}
               vehicleHotwired[plate] = true
               SetVehicleEngineOn(vehicle, true, true)
               TriggerServerEvent('garage:addKeys', plate)
               TriggerEvent('vehicle:start')
-              TriggerEvent('DoLongHudText', 'you took your keys', 1)
+              TriggerEvent('DoLongHudText', 'you got your keys', 1)
           else
             TriggerEvent('DoLongHudText', 'failed to find keys', 2)
           end

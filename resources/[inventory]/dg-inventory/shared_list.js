@@ -86,7 +86,7 @@ itemList["tuner"]	    = {fullyDegrades: true, decayrate: 0.0, displayname: "Tune
 
 // drugs
 
-itemList["joint"]	    = {fullyDegrades: true, illegal: true, decayrate: 0.0, displayname: "3g Joint",    craft: [ {itemid: "weedq", amount: 0.5 }, {itemid: "rollingpaper", amount: 1 } ], price: 20, weight: 1,   nonStack: false, model: "", image: "np_joint.png", information: "Its a Joint, man. ", deg: false}
+itemList["joint"]	    = {fullyDegrades: true, illegal: true, decayrate: 0.0, displayname: "2g Joint",    craft: [ {itemid: "weedq", amount: 0.5 }, {itemid: "rollingpaper", amount: 1 } ], price: 20, weight: 1,   nonStack: false, model: "", image: "np_joint.png", information: "Its a Joint, man. ", deg: false}
 itemList["meth"]	    = {fullyDegrades: true, illegal: true, decayrate: 0.0, displayname: "Blue Meth", price: 500, weight: 1, nonStack: false, model: "", image: "np_meth-baggy.png", information: "Do you like to get high?" , deg: false}
 itemList["oxy"]	        = {fullyDegrades: true, illegal: true, decayrate: 0.0, displayname: "Oxy", price: 150, weight: 1, nonStack: false, model: "", image: "np_Oxy.png", information: "Limits Stress to 0 for an extended period of time <br> Increases Thirst <br> Has addiction properties " , deg: false}
 itemList["1gcocaine"]	= {fullyDegrades: true, illegal: true, decayrate: 0.0, displayname: "5g Clean Coke",    craft: [ {itemid: "glucose", amount: 0.01 }, {itemid: "coke5g", amount: 0.1 } ], price: 100, weight: 1,   nonStack: false, model: "", image: "np_cocaine-baggy.png", information: "Clean Cut Cocaine. ", deg: false}

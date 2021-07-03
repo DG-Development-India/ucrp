@@ -263,12 +263,12 @@ AddEventHandler('dg:updateAmmoCount', function(data)
 		local owner = xPlayer.identifier
 		local allammo = json.encode(data)
 		
-		exports.ghmattimysql:execute('UPDATE og_base SET ammo = @ammo WHERE identifier = @identifier', {
+		exports.ghmattimysql:execute('UPDATE dg_base SET ammo = @ammo WHERE identifier = @identifier', {
 			['@ammo'] = allammo,
 			['@identifier'] = owner,
 		})
 
-		exports.ghmattimysql:execute('SELECT * FROM og_base WHERE identifier = @identifier', {
+		exports.ghmattimysql:execute('SELECT * FROM dg_base WHERE identifier = @identifier', {
 			['@identifier'] = owner,
 		}, function(results)
 			if #results == 0 then
@@ -287,7 +287,7 @@ AddEventHandler('dg:getAmmoData', function()
 	local xPlayer = DGCore.GetPlayerFromId(source)
 	if xPlayer ~= nil then
 		local owner = xPlayer.identifier
-		exports.ghmattimysql:execute('SELECT * FROM og_base WHERE identifier = @identifier', {
+		exports.ghmattimysql:execute('SELECT * FROM dg_base WHERE identifier = @identifier', {
 			['@identifier'] = owner,
 		}, function(results)
 			if #results == 0 then

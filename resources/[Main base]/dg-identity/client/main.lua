@@ -99,7 +99,6 @@ RegisterNUICallback('register', function(data, cb)
         TriggerServerEvent('dg-identity:setIdentity', data, myIdentifiers)
         EnableGui(false)
 		TriggerEvent('dg-clothing:defaultReset', myIdentifiers.id)
-		TriggerEvent('dg-clothing:defaultResetbarber', myIdentifiers.id)
 		--TriggerEvent('player:receiveItem', "idcard", 1)
 		--TriggerEvent('player:receiveItem', "mobilephone", 1)
     else

@@ -83,3 +83,37 @@ RegisterServerEvent('inv:addItem')
 AddEventHandler('inv:addItem', function(target,item,count)
     TriggerClientEvent('player:receiveItem', target, item, count)
 end)
+
+-----------------ammo-------------------------
+
+RegisterServerEvent('dg-inventory:updateAmmoCount')
+AddEventHandler('dg-inventory:updateAmmoCount', function(hash, count)
+    local player = DGCore.GetPlayerFromId(source)
+    MySQL.Async.execute('UPDATE dg_ammo SET count = @count WHERE hash = @hash AND owner = @owner', {
+        ['@owner'] = player.identifier,
+        ['@hash'] = hash,
+        ['@count'] = count
+    }, function(results)
+        if results == 0 then
+            MySQL.Async.execute('INSERT INTO dg_ammo (owner, hash, count) VALUES (@owner, @hash, @count)', {
+                ['@owner'] = player.identifier,
+                ['@hash'] = hash,
+                ['@count'] = count
+            })
+        end
+    end)
+end)
+
+DGCore.RegisterServerCallback('dg-inventory:getAmmoCount', function(source, cb, hash)
+    local player = DGCore.GetPlayerFromId(source)
+    MySQL.Async.fetchAll('SELECT * FROM dg_ammo WHERE owner = @owner and hash = @hash', {
+        ['@owner'] = player.identifier,
+        ['@hash'] = hash
+    }, function(results)
+        if #results == 0 then
+            cb(nil)
+        else
+            cb(results[1].count)
+        end
+    end)
+end)

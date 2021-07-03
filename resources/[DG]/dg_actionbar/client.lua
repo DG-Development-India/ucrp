@@ -245,7 +245,7 @@ AddEventHandler('equipWeaponID', function(_hash,newInformation,sqlID)
 		TriggerEvent("hud-display-item",hash,"Holster")
 
 		holster1h()
-		TriggerServerEvent('ogrp:updateAmmoCount',currentWeapons)
+		TriggerServerEvent('dg:updateAmmoCount',currentWeapons)
 		
 	else
 
@@ -295,7 +295,7 @@ AddEventHandler('actionbar:ammo', function(hash,amount,addition)
 	currentWeapons[hashx2] = currentWeapons[hashx2] + amount
 
 	SetPedAmmo(ped, hashx, currentWeapons[hashx2])
-	TriggerServerEvent('ogrp:updateAmmoCount',currentWeapons)
+	TriggerServerEvent('dg:updateAmmoCount',currentWeapons)
 
 end)
 

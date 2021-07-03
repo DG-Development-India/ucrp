@@ -30,6 +30,7 @@ local IdentifierTables = {
     {table = "pw_motels", column = "ident"},
     {table = "phone_messages", column = "id"},
     {table = "dg_ammo", column = "owner"},
+    {table = "dg_base", column = "identifier"},
 }
 
 RegisterServerEvent("kashactersS:SetupCharacters")
