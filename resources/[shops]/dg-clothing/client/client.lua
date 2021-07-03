@@ -888,6 +888,7 @@ Citizen.CreateThread(function()
         local nearcloth = IsNearShop(clothingShops)
         local neartat = IsNearShop(tattoosShops)
         local nearbarber = IsNearShop(barberShops)
+        local nearstartingMenu = IsNearShop(healingShops)
 
 
         local menu = nil
@@ -898,8 +899,10 @@ Citizen.CreateThread(function()
             menu = {"tattoomenu", "Press ~g~E~s~ to change Tattoos $"..StoreCost}
         elseif nearbarber < 2 then
             menu = {"barbermenu", "Press ~g~E~s~ to visit the Barber $"..StoreCost}
-        elseif startingMenu then
-            menu = "clothesmenu"
+        elseif nearstartingMenu < 2 then
+            menu = {"clothesmenu"}
+        --elseif startingMenu then
+            --menu = "clothesmenu"
         end
 
 
@@ -1040,7 +1043,8 @@ AddEventHandler("dg-clothing:defaultReset", function()
         SetSkin(`mp_m_freemode_01`, true)
     end
     OpenMenu("clothesmenu")
-    startingMenu = true
+    --startingMenu = true
+    nearstartingMenu = true
 end)
 
 
