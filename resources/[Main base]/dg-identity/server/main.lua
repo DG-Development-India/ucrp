@@ -245,6 +245,6 @@ AddEventHandler('onResourceStart', function(resource)
 	end
 end)
 
-MySQL.Async.execute('INSERT INTO dg_base (identifier) VALUES (@identifier)', {
-	['@identifier']		= identifier,
-})
+-- MySQL.Async.execute('INSERT INTO dg_base (identifier) VALUES (@identifier)', {
+-- 	['@identifier']		= identifier,
+-- })

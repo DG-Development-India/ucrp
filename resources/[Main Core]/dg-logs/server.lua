@@ -3,19 +3,19 @@ TriggerEvent('dg:getSharedObject', function(obj) DGCore = obj end)
 
 -- Made by Tazio
 
-local DISCORD_CHAT_WEBHOOK = "https://discord.com/api/webhooks/855819013065146369/FBUhzNQamabrUPFSDFuikl1fr-wi-W3s_HEu-Lp7zHw_eWBrA6Woge2mh5rWY3zix5H7"
-local DISCORD_KILLED_BY_WEBHOOK = "https://discord.com/api/webhooks/855819151709044766/X8Mmyao9tycC9tcDjLjW-3E1fqyibFsWvMG_ke-CFCrz1tNyoMyuYQmhYZ9wRVCh85GP"
-local DISCORD_CONNECTING_WEBHOOK = "https://discord.com/api/webhooks/855819258260357120/0GCNdWZSedNEjO7J3pEPBdBWBwgKznId8AIRZD4Iq0fkXrYwBUf9ffZr2MI4d-1Qymod"
-local DISCORD_DISCONNECTED_WEBHOOKS = "https://discord.com/api/webhooks/855819412564082709/kuDfoYJ_unCtY8ZkiPxkFvjQMmxk3yYGyLgTNKla2Z-Dv0QfrDPFYyfamAucsvVRizS5"
-local DISCORD_ME_WEBHOOK = "https://discord.com/api/webhooks/855819571785105438/sP-q8kTK1nsEIO5qM3ZJdscPRML7MiPmJ4XOxvjjfmg6U9gjj5JWW_kr30ZkZz1yDSIA"
-local DISCORD_OOC_WEBHOOK = "https://discord.com/api/webhooks/855819693600669737/3o0szNnAysQgXe2eSQWKonqUcw4FyzuiiTT4Xh52AtgpwZZgBr5yagTN7ka95xDavcOr"
+local DISCORD_CHAT_WEBHOOK = "https://discord.com/api/webhooks/860892357560631336/x5pjpITVdelNW23H-DZo83dFAlLAsmL93xSvD5DqgkS7ACze5ReUXIIPoNrkJJFR6qbX"
+local DISCORD_KILLED_BY_WEBHOOK = "https://discord.com/api/webhooks/860892621123747861/gU5RyUF5gIlnTYLovwgeOVq8bX7pS_QSFP9_BIIoYukOQJCmsu1GcbsTPPylx6q41puK"
+local DISCORD_CONNECTING_WEBHOOK = "https://discord.com/api/webhooks/860892933497421824/HdCtM8tpEgnDdf_sVyfFSLqf1fCZdyTWk5sc7B2NDX5gkVJ3pvvR4AzH-Ld_tIQjoN6l"
+local DISCORD_DISCONNECTED_WEBHOOKS = "https://discord.com/api/webhooks/860893078416261140/vJHsREd_ts989lzy7wryV4C5j-fGwDUrvFK53XzXcQFfaWxcDuaZA4hveYrgVjpNYB8v"
+local DISCORD_ME_WEBHOOK = "https://discord.com/api/webhooks/860893418912743455/levf-y61wHFveVrChiMr-lSJxzERtw07cosic94Hgi2xtDAq1I18w5HbM8KtrOBv3h1L"
+local DISCORD_OOC_WEBHOOK = "https://discord.com/api/webhooks/860893705178710036/dr3fTIX_2IIYz2o7rN0blveO2XqYI0t8nWAurKG99CIzZA_dGRp4-vG6Bx8797e4zdJ6"
 local DISCORD_NAME = "dg Logs"
 local STEAM_KEY = "879616E21745B287EC66C67F1827D2D9"
 local DISCORD_IMAGE = "" -- default is FiveM logo
 
-local DISCORD_PF_WEBHOOK = "https://discord.com/api/webhooks/855820510092197938/6W4opGofcSE8wK1NIw0o8tsmC0YH5K7hWb5ICbJgOcONXw6uaYBV4u32wEYqiTjhod8n"
-local DISCORD_PS_WEBHOOK = "https://discord.com/api/webhooks/855820696499781642/1tY5b872EcPAiAU8U-JneEhNPjTH76HZAgC-M-EXmtoPvEADQbaeEMzA3YkhKMZZWS-I"
-local DISCORD_PDM_WEBHOOK = "https://discord.com/api/webhooks/855820898190622730/lzitlkjDQQvoJYb8niwzGS9laR1fOgt_cJDaaCmhP9qq0UcvKtQ_OCacsjMmqpD_1yWx"
+local DISCORD_PF_WEBHOOK = "https://discord.com/api/webhooks/860894825092087838/lYj-xQDjAf4Ecl3Nv-WFrfLFo7y_frQagJyFYgNnAnA62zBY1u2FKBoat0E0VGWwC4ma"
+local DISCORD_PS_WEBHOOK = "https://discord.com/api/webhooks/860894648367841290/aICsix907OExbKFR0arh9B27kgUDd8OZtsrGuD22lTmJxTEDQSinRIGhFoXI9cymodKe"
+local DISCORD_PDM_WEBHOOK = "https://discord.com/api/webhooks/860892176049242112/f_fpkPKovvKR5QtrwxOOL75vxyJwRES4Rr_r9IWA6HcH95rBQU9fabwF0hX8-V3RzcEc"
 --local DISCORD_COCAINE_WEBHOOK = "https://discord.com/api/webhooks/834010902230728755/-q26KGQcHzrb0CFUco0GNnCLggPk4sYFqGFVUb5YBkWK8yvgL1nATOplLSLsV4ywceiC"
 --local DISCORD_EDM_WEBHOOK = "https://discord.com/api/webhooks/835140664353751070/teN8Awc4qPaUBRc4IHeQbNjgOXCtLQgV0rsmWZGjkGlD3yPhve1TCtspISImzI1dAMt3"
 --local DISCORD_DRUG_RUN_WEBHOOK = "https://discord.com/api/webhooks/836489496932515840/mderKFwWLT7XrjUSFlLhDzreRvc2P5T18Kcgb3f6NmaDFHgSDVfAdBWoWDw6Cg3ZeD20"
@@ -131,8 +131,8 @@ end)
 
 --- GARBAGE JOB LOGS START
 
-local garbagePayhook = "https://discord.com/api/webhooks/855822174002872321/DJ_R99OYrMmyulk7X15WSjFiFSEdrngDeNeg_ahR_BPzYAKsCdBcOpNgf1S_eTzzmjNw"
-local garbageRewhook = "https://discord.com/api/webhooks/855822174002872321/DJ_R99OYrMmyulk7X15WSjFiFSEdrngDeNeg_ahR_BPzYAKsCdBcOpNgf1S_eTzzmjNw"
+local garbagePayhook = "https://discord.com/api/webhooks/860891024780034049/fCyKXTEo6kI0VDlT0ZXDDfPO3eMmCwIstJQKLRNLOiwEhOTqmqlTjQaCD985TwGYpl-x"
+local garbageRewhook = "https://discord.com/api/webhooks/860891024780034049/fCyKXTEo6kI0VDlT0ZXDDfPO3eMmCwIstJQKLRNLOiwEhOTqmqlTjQaCD985TwGYpl-x"
 
 RegisterServerEvent('garbagePay:logs')
 AddEventHandler('garbagePay:logs', function(source, name, money)
@@ -266,7 +266,7 @@ end)
 
 -- INVENTORY logs
 
-local INV_LOGS = 'https://discord.com/api/webhooks/855821298780471346/r1NMo2tNsAmC9DGFKNz96xipb5H6GH-mIptUGHj00PB_9BbnbOIsYcIDo9D-9OVK6qDW'
+local INV_LOGS = 'https://discord.com/api/webhooks/860894174400348160/8cAKKQ4Ei9eq1C_lVsd3YolXhNKA2fMTk03wvPfmvHL4DF3ow1_N_FC5Bnq6PrVYlb9-'
 
 RegisterServerEvent('motel:logs')
 AddEventHandler('motel:logs', function(amount,item,action,sname,sslot,tname,tslot)
@@ -301,7 +301,7 @@ AddEventHandler('swap:logs', function(sname,sslot,tname,tslot)
 end)
 
 -- Duty Logs
-local DUTY_LOGS = 'https://discord.com/api/webhooks/855821450514923550/YEm6piUUXgvDU8JOSg7dIAn-jMnEK97viLGKIv-yMEb1dSg73-tL4et-YdVtDJWc6ItU'
+local DUTY_LOGS = 'https://discord.com/api/webhooks/860895661268402206/u5rnr9ub7BmvBL46guw0igLmvayzA5HKGTRFulSK2t-xCIzlet7MN4oH4ewrmvLyPy-a'
 
 RegisterServerEvent('duty:logs')
 AddEventHandler('duty:logs', function(source, name, duty_text, code)
@@ -322,7 +322,7 @@ end)
 
 -- PAWN logs
 
-local PAWN_LOGS = 'https://discord.com/api/webhooks/855821568198049814/WJmVzH1C91WXaM7phKXySTdZBEfxcGe985fsUn79HosYOaDQAMLeagBOJCx1wH1NBhu-'
+local PAWN_LOGS = 'https://discord.com/api/webhooks/860895245208911943/fni4cf9sHnIYkD5IMyKIkQS1PuuFS6uh6qP9bhT7BavHU_YPD1apTCYkEeO8F4BK35s4'
 
 RegisterServerEvent('pawn:logs')
 AddEventHandler('pawn:logs', function(source,amount,label,price)
