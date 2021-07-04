@@ -150,7 +150,7 @@
     line-height: 22px;
     color: rgb(255, 255, 255);
     text-align: center;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: normal;
     border: #f0f3f0;
     border-width: 1px;
@@ -160,6 +160,6 @@
     font-family: 'Roboto Condensed', sans-serif;
     background: #0000007c;
     color: #ffffff;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: bold;
 }
