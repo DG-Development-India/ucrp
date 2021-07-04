@@ -686,8 +686,8 @@ Citizen.CreateThread(function()
               TriggerServerEvent('garage:addKeys', plate)
               TriggerEvent('vehicle:start')
               TriggerEvent('DoLongHudText', 'you got your keys', 1)
-          else
-            TriggerEvent('DoLongHudText', 'failed to find keys', 2)
+          -- else
+          --   TriggerEvent('DoLongHudText', 'failed to find keys', 2)
           end
         end, plate)
       end
