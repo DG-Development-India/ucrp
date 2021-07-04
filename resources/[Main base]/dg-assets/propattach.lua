@@ -29,7 +29,7 @@ AddEventHandler('attachPropPerm', function(attachModelSent,boneNumberSent,x,y,z,
 		removeAttachedPropPerm()
 		return
 	end
-	TriggerEvent("DoLongHudText","Press 7 to drop or pickup the object.",37)
+	--TriggerEvent("DoLongHudText","Press 7 to drop or pickup the object.",37)
 	
 	holdingPackage = true
 	attachModel = GetHashKey(attachModelSent)

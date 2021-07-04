@@ -411,6 +411,8 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon)
     if (itemid == "hydrocodone") then TriggerEvent('medic:hydrocodone') end
     if (itemid == "adrenaline") then TriggerEvent('medic:adrenaline') end
     if (itemid == "aspirin") then TriggerEvent('medic:aspirin') end
+    if (itemid == "MedicalBag") then TriggerEvent('attach:medicalBag') end
+    if (itemid == "SecurityCase") then TriggerEvent('attach:securityCase') end
 
     -- Reload Stuff
     
