@@ -1672,9 +1672,9 @@ AddEventHandler('tool:hcuffs', function()
 	    local target_id = GetPlayerServerId(player)
         if distance~=-1 and distance<=2.0 then
             UsingAnyItem = true
-            DGCore.TriggerServerCallback("esx_policejob:isCuffed",function(cuffed)
+            DGCore.TriggerServerCallback("dg-policejob:isCuffed",function(cuffed)
                 if not cuffed then
-                    TriggerEvent('esx_policejob:checkCuff', true, true)
+                    TriggerEvent('dg-policejob:checkCuff', true, true)
                     TriggerEvent("inventory:removeItem",'cuffs', 1)
                     local tool = exports["dg-taskbar"]:taskBar(2000,'Cuffing')
                 else
@@ -1692,8 +1692,8 @@ end)
 
 -- Boltcutter
 
-RegisterNetEvent('tool:boltcutter')
-AddEventHandler('tool:boltcutter', function()
+RegisterNetEvent('tool:cutter')
+AddEventHandler('tool:cutter', function()
     if canBeUsed then
         local player, distance = DGCore.Game.GetClosestPlayer()
 	    local playerheading = GetEntityHeading(GetPlayerPed(-1))
@@ -1704,16 +1704,16 @@ AddEventHandler('tool:boltcutter', function()
             
             UsingAnyItem = true
             if math.random(1,10) == 10 then
-                TriggerEvent("inventory:removeItem",'boltcutter', 1)
-                exports['mythic_notify']:SendAlert('error', 'You broke the boltcutter')
+                TriggerEvent("inventory:removeItem",'cutter', 1)
+                exports['mythic_notify']:SendAlert('error', 'You broke the cutter')
             end
        
-            DGCore.TriggerServerCallback("esx_policejob:isCuffed",function(cuffed)
+            DGCore.TriggerServerCallback("dg-policejob:isCuffed",function(cuffed)
 			    if not cuffed then
 				    exports['mythic_notify']:SendAlert('error', 'The player is not cuffed')
 			    else
                     TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'a_uncuff', 8.0, -8, 5000, 0, 0, 0, 0, 0)
-                    TriggerServerEvent("esx_policejob:handcuff",target_id,false,false,playerheading,playerCoords,playerlocation)
+                    TriggerServerEvent("dg-policejob:handcuff",target_id,false,false,playerheading,playerCoords,playerlocation)
                     
                 end
             end,GetPlayerServerId(player))

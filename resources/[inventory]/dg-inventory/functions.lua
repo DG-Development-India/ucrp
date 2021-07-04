@@ -220,7 +220,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon)
     if (itemid == "pdarmour") then TriggerEvent('tool:armour2') end
     if (itemid == "parachute") then TriggerEvent('tool:parachute') end
     if (itemid == "binoculars") then TriggerEvent('tool:binoculars')  end
-    if (itemid == "boltcutter") then TriggerEvent('tool:boltcutter') end
+    if (itemid == "cutter") then TriggerEvent('tool:cutter') end
     if (itemid == "boombox") then TriggerEvent('tool:boombox') end
     -- if (itemid == "radio") then TriggerEvent('ls-radio:use') end
     if (itemid == "cuff_keys") then TriggerEvent('tool:cuff_keys') end

@@ -9,7 +9,7 @@ client_scripts {
     'items.lua',
     'shops.lua',
     'prone.lua',
-    -- 'teleports.lua',
+    'teleports.lua',
     'propattach.lua',
     'status.lua',
     'heli_client.lua',
