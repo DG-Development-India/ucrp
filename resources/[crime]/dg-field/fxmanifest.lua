@@ -14,5 +14,6 @@ server_scripts {
 client_scripts {
 
 	'config.lua',
-	'client/weed.lua'
+	'client/weed.lua',
+	'client/coke.lua'
 }

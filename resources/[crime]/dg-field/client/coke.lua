@@ -38,14 +38,14 @@ Citizen.CreateThread(function()
 
 		if nearbyObject and IsPedOnFoot(playerPed) then
 			if not isPickingUp then
-				Draw2DText(0.06, 0.50, 'Press ~r~[E]~w~ to collect Plant', 0.4)
+				Draw2DText(0.06, 0.50, 'Press ~r~[E]~w~ to collect leaves', 0.4)
 			end
 
 			if IsControlJustReleased(0, 38) and not isPickingUp then
 				isPickingUp = true
 				FreezeEntityPosition(playerPed, true)
 				TaskStartScenarioInPlace(playerPed, 'world_human_gardener_plant', 0, false)
-				if not exports["dg-taskbar"]:taskBar(2000, 'Plucking coke plant') then
+				if not exports["dg-taskbar"]:taskBar(2000, 'Cutting coca leaves') then
 					exports['mythic_notify']:SendAlert('error', 'Already doing an action!')
 					ClearPedTasks(playerPed)
 					FreezeEntityPosition(playerPed, false)
@@ -58,7 +58,7 @@ Citizen.CreateThread(function()
 					table.remove(cokePlants, nearbyID)
 					spawnedWeeds = spawnedWeeds - 1
 					local randomchance = math.random(1,100)
-					TriggerEvent('player:receiveItem', 'cannabis', 1)
+					TriggerEvent('player:receiveItem', 'cocaleaves', 1)
 					-- if randomchance > 50 and randomchance <= 90 then
 						-- if math.random(1,2) == 1 then
 							-- TriggerEvent('player:receiveItem', 'lowgrademaleseed', 1)
@@ -152,7 +152,7 @@ end
 --- Cocaine Processing System ---
 
 local pressed = false
-local cokeProcessCoords = {['x'] = 1093.18, ['y'] = -3194.925, ['z'] = -38.99}
+local cokeProcessCoords = {['x'] = 1092.875, ['y'] = -3194.929, ['z'] = -38.99347}
 
 Citizen.CreateThread(function()
     local wait = 100
@@ -168,7 +168,7 @@ Citizen.CreateThread(function()
             	if distance <= 1.0 then
                 	DrawText3D(cokeProcessCoords.x,cokeProcessCoords.y,cokeProcessCoords.z, "[~g~E~s~] - Process")
                 	if IsControlJustReleased(0, 86) and not pressed then
-						if exports['dg-inventory']:hasEnoughOfItem('cannabis', 3) and exports['dg-inventory']:hasEnoughOfItem('smallscales', 1) and exports['dg-inventory']:hasEnoughOfItem('emptybaggies', 1) then
+						if exports['dg-inventory']:hasEnoughOfItem('cocaleaves', 3) and exports['dg-inventory']:hasEnoughOfItem('smallscales', 1) and exports['dg-inventory']:hasEnoughOfItem('emptybaggies', 1) then
 							pressed = true
                     		cokeprocessing()
 							Citizen.Wait(2000)
@@ -187,7 +187,7 @@ end)
 
 function cokeprocessing()
 	local player = GetPlayerPed(-1)
-	SetEntityHeading(player, 90.89)
+	SetEntityHeading(player, 180.07)
 	FreezeEntityPosition(player, true)
     exports['mythic_progbar']:Progress({
         name = "Coke Processing",
@@ -208,10 +208,10 @@ function cokeprocessing()
         }
     }, function(cancelled)
         if not cancelled then
-            if exports['dg-inventory']:hasEnoughOfItem('cannabis', 3) and exports['dg-inventory']:hasEnoughOfItem('smallscales', 1) and exports['dg-inventory']:hasEnoughOfItem('emptybaggies', 1) then
-                TriggerEvent("inventory:removeItem","cannabis", 3)
+            if exports['dg-inventory']:hasEnoughOfItem('cocaleaves', 3) and exports['dg-inventory']:hasEnoughOfItem('smallscales', 1) and exports['dg-inventory']:hasEnoughOfItem('emptybaggies', 1) then
+                TriggerEvent("inventory:removeItem","cocaleaves", 3)
                 TriggerEvent("inventory:removeItem","emptybaggies", 1)
-                TriggerEvent('player:receiveItem', "cokeoz", 1)
+                TriggerEvent('player:receiveItem', "cocaine", 1)
             else
                 exports['mythic_notify']:SendAlert('error', 'Not Enough items')
             end
