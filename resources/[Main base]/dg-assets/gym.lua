@@ -93,7 +93,7 @@ end)
   local blip = AddBlipForCoord(-1215.0224609375,-1541.6857910156,4.7281851768494)
   SetBlipSprite (blip, 197) -- $ Sign
   SetBlipDisplay(blip, 4)
-  SetBlipScale  (blip, 0.7)
+  SetBlipScale  (blip, 0.0)
   SetBlipColour	(blip, 37)
   SetBlipAsShortRange(blip, true)
   BeginTextCommandSetBlipName("STRING")
