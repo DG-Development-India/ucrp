@@ -1079,4 +1079,52 @@ Config.DoorList = {
 		pickable = false,
 		distance = 2
 	}
+
+	--- pdm
+
+	
+	-- {
+	-- 	textCoords = vector3(-1260.673, -349.44, 36.90749),
+	-- 	authorizedJobs = { 'pdm' },
+	-- 	locking = false,
+	-- 	locked = true,
+	-- 	pickable = false,
+	-- 	distance = 2.5,
+	-- 	doors = {
+	-- 		{
+	-- 			objName = "v_ilev_genbankdoor1",
+	-- 			objYaw = 60.0,
+	-- 			objCoords = vector3(-1261.8756103515625, -349.6961975097656, 37.11116027832031)
+	-- 		},
+
+	-- 		{
+	-- 			objName = "v_ilev_genbankdoor2",
+	-- 			objYaw = 60.0,
+	-- 			objCoords = vector3(-1259.59130859375, -348.5322570800781, 37.11116027832031)
+	-- 		}
+	-- 	}
+	-- },
+
+	-- {
+	-- 	textCoords = vector3(-1269.339, -369.3975, 36.90405),
+	-- 	authorizedJobs = { 'pdm' },
+	-- 	locking = false,
+	-- 	locked = true,
+	-- 	pickable = false,
+	-- 	distance = 2.5,
+	-- 	doors = {
+	-- 		{
+	-- 			objName = "v_ilev_genbankdoor1",
+	-- 			objYaw = 0.0,
+	-- 			objCoords = vector3(-1268.5780029296875, -370.37017822265625, 37.0992431640625)
+	-- 		},
+
+	-- 		{
+	-- 			objName = "v_ilev_genbankdoor2",
+	-- 			objYaw = 0.0,
+	-- 			objCoords = vector3(-1269.7930908203125, -368.1114807128906, 37.11116027832031)
+	-- 		}
+	-- 	}
+	-- }
+
 }

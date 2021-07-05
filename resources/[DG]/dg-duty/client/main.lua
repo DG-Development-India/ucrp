@@ -64,6 +64,11 @@ AddEventHandler('dg-duty:hasEnteredMarker', function (zone)
     CurrentActionMsg  = _U('duty')
     CurrentActionData = {}
   end
+  if zone == 'MechanicDuty' then
+    CurrentAction     = 'mechanic_duty'
+    CurrentActionMsg  = _U('duty')
+    CurrentActionData = {}
+  end
 end)
 
 AddEventHandler('dg-duty:hasExitedMarker', function (zone)
@@ -148,11 +153,29 @@ Citizen.CreateThread(function ()
             Wait(1000)
           else
             TriggerEvent('InteractSound_CL:PlayOnOne', 'dispatch', 0.4)
-            TriggerEvent("DoLongHudText", "10-41 & Re-Stocked", 1)
+            TriggerEvent("DoLongHudText", "You went on-duty", 1)
             Wait(1000)
           end
         else
           TriggerEvent("DoLongHudText", "You are not part of the pdm employee ! Consider joining by applying on the government website", 2)
+          Wait(1000)
+          end
+        end
+
+        if CurrentAction == 'mechanic_duty' then
+          if PlayerData.job.name == 'mechanic' or PlayerData.job.name == 'offmechanic' then
+            TriggerServerEvent('duty:mechanic')
+          if PlayerData.job.name == 'mechanic' then
+            TriggerEvent('InteractSound_CL:PlayOnOne', 'dispatch', 0.4)
+            TriggerEvent("DoLongHudText", "You have gone off-duty", 1)
+            Wait(1000)
+          else
+            TriggerEvent('InteractSound_CL:PlayOnOne', 'dispatch', 0.4)
+            TriggerEvent("DoLongHudText", "You went on-duty", 1)
+            Wait(1000)
+          end
+        else
+          TriggerEvent("DoLongHudText", "You are not part of the mechanic employee ! Consider joining by applying on the government website", 2)
           Wait(1000)
           end
         end
