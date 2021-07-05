@@ -336,7 +336,7 @@ local blips = {
     {title="Boat Rental", colour=4, id=427, scale=0.7, x = -3424.41, y = 982.81, z = 8.43},
     {title="Boat Rental", colour=4, id=427, scale=0.7, x = 1308.91, y = 4362.29, z = 41.55},
     {title="Boat Rental", colour=4, id=427, scale=0.7, x = 3807.98, y = 4478.62, z = 6.37},
-    {title="Pearls Seafood Restaurant", colour=48, id=267, scale=0.6, x = -1846.707, y = -1190.704, z = 14.32304},
+    --{title="Pearls Seafood Restaurant", colour=48, id=267, scale=0.6, x = -1846.707, y = -1190.704, z = 14.32304},
  }
      
 Citizen.CreateThread(function()
