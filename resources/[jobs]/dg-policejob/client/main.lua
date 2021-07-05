@@ -872,97 +872,97 @@ local targetLastHealth
 local bodySweat = 0
 local sweatTriggered = false
 local Currentstates
-Citizen.CreateThread(function()
+-- Citizen.CreateThread(function()
 
-    while true do
-        Wait(300)
+--     while true do
+--         Wait(300)
 
-        if IsPedInAnyVehicle(PlayerPedId(), false) then
-        	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
-        	local bicycle = IsThisModelABicycle( GetEntityModel(vehicle) )
-        	local speed = GetEntitySpeed(vehicle)
-        	if bicycle and speed > 0 then
-        		sweatTriggered = true
-        		if bodySweat < 180000 then
-        			bodySweat = bodySweat + (150 + math.ceil(speed * 40))
-        		else
-        			bodySweat = bodySweat + (150 + math.ceil(speed * 11))
-        		end
+--         if IsPedInAnyVehicle(PlayerPedId(), false) then
+--         	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
+--         	local bicycle = IsThisModelABicycle( GetEntityModel(vehicle) )
+--         	local speed = GetEntitySpeed(vehicle)
+--         	if bicycle and speed > 0 then
+--         		sweatTriggered = true
+--         		if bodySweat < 180000 then
+--         			bodySweat = bodySweat + (150 + math.ceil(speed * 40))
+--         		else
+--         			bodySweat = bodySweat + (150 + math.ceil(speed * 11))
+--         		end
 
-        		if bodySweat > 300000 then
-	        		bodySweat = 300000
-	        	end
-        	end
-        end        
+--         		if bodySweat > 300000 then
+-- 	        		bodySweat = 300000
+-- 	        	end
+--         	end
+--         end        
 
-        if IsPedInMeleeCombat(PlayerPedId()) then
-        	bodySweat = bodySweat + 4000
-        	sweatTriggered = true
-        	target = GetMeleeTargetForPed(PlayerPedId())
-        	if target == lastTarget or lastTarget == nil then
-        		if IsPedAPlayer(target) then
-        			lastTarget = target
-        		end
-        	else
-        		if IsPedAPlayer(target) then
-	        		targetLastHealth = GetEntityHealth(target)
-	        		lastTarget = target
-	        	end
-        	end
-        end
+--         if IsPedInMeleeCombat(PlayerPedId()) then
+--         	bodySweat = bodySweat + 4000
+--         	sweatTriggered = true
+--         	target = GetMeleeTargetForPed(PlayerPedId())
+--         	if target == lastTarget or lastTarget == nil then
+--         		if IsPedAPlayer(target) then
+--         			lastTarget = target
+--         		end
+--         	else
+--         		if IsPedAPlayer(target) then
+-- 	        		targetLastHealth = GetEntityHealth(target)
+-- 	        		lastTarget = target
+-- 	        	end
+--         	end
+--         end
 
-        if IsPedSwimming(PlayerPedId()) then
-        	local speed = GetEntitySpeed(PlayerPedId())
-        	if speed > 0 then
-        		sweatTriggered = true
-        		TriggerEvent("Evidence:StateSet",20,0)
-        		TriggerEvent("Evidence:StateSet",21,0)
-        		TriggerEvent("Evidence:StateSet",23,600)
-        		if bodySweat < 180000 then
-        			bodySweat = bodySweat + (150 + math.ceil(speed * 40))
-        		else
-        			bodySweat = bodySweat + (150 + math.ceil(speed * 11))
-        		end
+--         if IsPedSwimming(PlayerPedId()) then
+--         	local speed = GetEntitySpeed(PlayerPedId())
+--         	if speed > 0 then
+--         		sweatTriggered = true
+--         		TriggerEvent("Evidence:StateSet",20,0)
+--         		TriggerEvent("Evidence:StateSet",21,0)
+--         		TriggerEvent("Evidence:StateSet",23,600)
+--         		if bodySweat < 180000 then
+--         			bodySweat = bodySweat + (150 + math.ceil(speed * 40))
+--         		else
+--         			bodySweat = bodySweat + (150 + math.ceil(speed * 11))
+--         		end
         		
 
-        		if bodySweat > 210000 then
-        			TriggerEvent("Evidence:StateSet",19,600)
-	        		bodySweat = 210000
-	        	end
-        	end
-        end
+--         		if bodySweat > 210000 then
+--         			TriggerEvent("Evidence:StateSet",19,600)
+-- 	        		bodySweat = 210000
+-- 	        	end
+--         	end
+--         end
 
-        if IsPedRunning(PlayerPedId()) then
-        	bodySweat = bodySweat + 3000
-        	if bodySweat > 800000 then
-        		bodySweat = 800000
-        	end
-        elseif bodySweat > 0.0 then
-        	if not sweatTriggered then
-        		bodySweat = 0.0
-        	end
-        	if bodySweat < 100000 then
-        		bodySweat = bodySweat - 1500
-        	end
-        	bodySweat = bodySweat - 100
-        	if bodySweat == 0.0 then
-        		sweatTriggered = false
-        	end
-        end
-        if bodySweat > 200000 and not IsPedSwimming(PlayerPedId()) then
-			TriggerEvent("Evidence:StateSet",19,300)
-        end  
+--         if IsPedRunning(PlayerPedId()) then
+--         	bodySweat = bodySweat + 3000
+--         	if bodySweat > 800000 then
+--         		bodySweat = 800000
+--         	end
+--         elseif bodySweat > 0.0 then
+--         	if not sweatTriggered then
+--         		bodySweat = 0.0
+--         	end
+--         	if bodySweat < 100000 then
+--         		bodySweat = bodySweat - 1500
+--         	end
+--         	bodySweat = bodySweat - 100
+--         	if bodySweat == 0.0 then
+--         		sweatTriggered = false
+--         	end
+--         end
+--         if bodySweat > 200000 and not IsPedSwimming(PlayerPedId()) then
+-- 			TriggerEvent("Evidence:StateSet",19,300)
+--         end  
 
-        if bodySweat > 300000 and not IsPedSwimming(PlayerPedId()) and Currentstates[22]["timer"] < 50 then
-			TriggerEvent("Evidence:StateSet",20,450)
-        end 
-        if bodySweat > 800000 and not IsPedSwimming(PlayerPedId()) and Currentstates[22]["timer"] < 50 then
-        	sweatTriggered = true
-			TriggerEvent("Evidence:StateSet",21,600)
-        end
+--         if bodySweat > 300000 and not IsPedSwimming(PlayerPedId()) and Currentstates[22]["timer"] < 50 then
+-- 			TriggerEvent("Evidence:StateSet",20,450)
+--         end 
+--         if bodySweat > 800000 and not IsPedSwimming(PlayerPedId()) and Currentstates[22]["timer"] < 50 then
+--         	sweatTriggered = true
+-- 			TriggerEvent("Evidence:StateSet",21,600)
+--         end
 
-    end
-end)
+--     end
+-- end)
 
 handCuffedWalking = false
 RegisterNetEvent('handCuffedWalking')
