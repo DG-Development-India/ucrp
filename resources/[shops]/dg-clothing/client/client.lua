@@ -888,21 +888,18 @@ Citizen.CreateThread(function()
         local nearcloth = IsNearShop(clothingShops)
         local neartat = IsNearShop(tattoosShops)
         local nearbarber = IsNearShop(barberShops)
-        local nearstartingMenu = IsNearShop(healingShops)
 
 
         local menu = nil
 
         if nearcloth < 2 then
-            menu = {"clothesm", "Press ~g~E~s~ to change Clothes $"..StoreCost}
+            menu = {"clothesm", "Press ~g~M~s~ to change Clothes $"..StoreCost}
         elseif neartat < 2 then
-            menu = {"tattoomenu", "Press ~g~E~s~ to change Tattoos $"..StoreCost}
+            menu = {"tattoomenu", "Press ~g~M~s~ to change Tattoos $"..StoreCost}
         elseif nearbarber < 2 then
-            menu = {"barbermenu", "Press ~g~E~s~ to visit the Barber $"..StoreCost}
-        elseif nearstartingMenu < 2 then
-            menu = {"clothesmenu"}
-        --elseif startingMenu then
-            --menu = "clothesmenu"
+            menu = {"barbermenu", "Press ~g~M~s~ to visit the Barber $"..StoreCost}
+        elseif startingMenu then
+            menu = "clothesmenu"
         end
 
 
@@ -911,7 +908,7 @@ Citizen.CreateThread(function()
             if (not enabled) then
                 DisplayHelpText(menu[2])
 
-                if IsControlJustPressed(1, 38) then
+                if IsControlJustPressed(1, 244) then
                     TriggerServerEvent("clothing:checkMoney",menu[1],StoreCost)
                 end
             else
@@ -1043,8 +1040,7 @@ AddEventHandler("dg-clothing:defaultReset", function()
         SetSkin(`mp_m_freemode_01`, true)
     end
     OpenMenu("clothesmenu")
-    --startingMenu = true
-    nearstartingMenu = true
+    startingMenu = true
 end)
 
 
@@ -1090,8 +1086,7 @@ end
 
 
 RegisterCommand("outfitadd", function(source, args, rawCommand)
-    --if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
-    if IsNearShop(clothingShops) < 9.0 then
+    if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
         if args[1] and args[2] then
             TriggerEvent('dg-clothing:outfits', 1, args[1], args[2])
         else
@@ -1103,8 +1098,7 @@ RegisterCommand("outfitadd", function(source, args, rawCommand)
 end, false)
 
 RegisterCommand("outfituse", function(source, args, rawCommand)
-    --if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
-    if IsNearShop(clothingShops) < 9.0 then
+    if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
         if args[1] then
             TriggerEvent('dg-clothing:outfits', 3, args[1])
         else
@@ -1116,8 +1110,7 @@ RegisterCommand("outfituse", function(source, args, rawCommand)
 end, false) 
 
 RegisterCommand("outfitdel", function(source, args, rawCommand)
-    --if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
-    if IsNearShop(clothingShops) < 9.0 then
+    if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
         if args[1] then
             TriggerEvent('dg-clothing:outfits', 2, args[1])
         else
@@ -1129,8 +1122,7 @@ RegisterCommand("outfitdel", function(source, args, rawCommand)
 end, false) 
 
 RegisterCommand("outfits", function(source, args, rawCommand)
-    --if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
-    if IsNearShop(clothingShops) < 9.0 then
+    if exports["dg-housing"]:imClosesToRoom2() or exports["dg-apartments"]:imClosesToRoom3() or (IsNearShop(clothingShops) < 9.0) then
         TriggerEvent('dg-clothing:outfits', 4)
     else
         TriggerEvent('DoLongHudText', "You are not near a wardrobe", 2)
