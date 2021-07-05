@@ -17,8 +17,8 @@ Config.slots = {
 		cat = 'bicycles'
     },
     {
-        pos = vector3(-42.98,-1103.37,25.38),
-        heading = 4.09,
+        pos = vector3(-37.043,-1089.672,34.93754),  -- up
+        heading = 159.72937011719,
 		cat = 'motorcycles'
     },
 	{
@@ -27,28 +27,28 @@ Config.slots = {
 		cat = 'compacts'
     },
 	{
-        pos = vector3(-50.25,-1101.24,25.38),
-        heading = 23.91,
+        pos = vector3(-55.38203,-1097.778,25.4223),
+        heading = 257.25775146484,
 		cat = 'sports'
     },
 	{
-        pos = vector3(-48.24,-1093.63,25.43),
-        heading = 184.65,
+        pos = vector3(-52.52143,-1092.486,25.4223),
+        heading = 198.453125,
 		cat = 'muscle'
     },
 	{
-        pos = vector3(-43.97,-1093.99,25.5),
-        heading = 176.4,
+        pos = vector3(-41.12822,-1088.42,35.41015), --up
+        heading = 246.18957519531,
 		cat = 'super'
     },
 	{
-		pos = vector3(-52.46,-1094.48,25.27),
-        heading = 221.18,
+		pos = vector3(-33.1583,-1091.244,35.41041), -- up
+        heading = 69.080635070801,
 		cat = 'coupes'
     },
 	{
-		pos = vector3(-40.19,-1095.67,25.27),
-        heading = 175.56,
+		pos = vector3(-37.81529,-1096.019,25.42232),
+        heading = 154.33712768555,
 		cat = 'sportsclassics'
     },
 	{
@@ -67,18 +67,18 @@ Config.slots = {
 		cat = 'smallbot'
     },
 	{
-		pos = vector3(126.31, -157.21, 53.79),
-        heading = 297.59,
+		pos = vector3(-30.71526, -1108.269, 34.9077), --up
+        heading = 337.49295043945,
 		cat = 'newmuscle'
 	},
 	{
-		pos = vector3(134.13, -160.27, 53.79),
-        heading = 297.59,
+		pos = vector3(-34.2042, -1099.138, 34.8872), --up
+        heading = 338.60629272461,
 		cat = 'newsuv'
 	},
 	{
-		pos = vector3(142.08, -163.62, 53.79),
-        heading = 297.59,
+		pos = vector3(-41.7650, -1096.474, 34.88677), --up
+        heading = 342.22760009766,
 		cat = 'newsport'
 	}
 }
@@ -667,15 +667,15 @@ Config.cars = {
 		['toro2'] = {price = 900000},
     },
 	['newmuscle'] = {
-		['alfa65'] = {price = 120000},
+		['a8fsi'] = {price = 120000},
 	},
 		
 	['newsuv'] = {
-		['mansm8'] = {price = 150000},
-		['pgtc4'] = {price = 150000},
+		['a8fsi'] = {price = 150000},
+		['a8fsi'] = {price = 150000},
 	},
 		
 	['newsport'] = {
-		['camarozl1'] = {price = 200000},
+		['a8fsi'] = {price = 200000},
 	}
 }
