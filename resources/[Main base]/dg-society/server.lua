@@ -71,14 +71,16 @@ AddEventHandler('dg_society:withdrawMoney', function(_society, amount)
 	amount = DGCore.Math.Round(tonumber(amount))
 
 	if xPlayer.job.name == society.name then
-		TriggerEvent('dg_addonaccount:getSharedAccount', society.account, function(account)
+		TriggerEvent('dg-addonaccount:getSharedAccount', society.account, function(account)
 			if amount > 0 and account.money >= amount then
 				account.removeMoney(amount)
 				xPlayer.addMoney(amount)
 
-				xPlayer.showNotification('You have withdrawn $ '..DGCore.Math.GroupDigits(amount)..' from the society fund.')
+				--xPlayer.showNotification('You have withdrawn $ '..DGCore.Math.GroupDigits(amount)..' from the society fund.')
+				TriggerClientEvent('DoLongHudText', xPlayer.source, 'you have withdrawn $', amount, 1)
 			else
-				xPlayer.showNotification('Invalid Amount')
+				--xPlayer.showNotification('Invalid Amount')
+				TriggerClientEvent('DoLongHudText', xPlayer.source, 'Invalid Amount', 2)
 			end
 		end)
 	else
@@ -91,7 +93,7 @@ AddEventHandler('dg_society:addMoney', function(_society, amount)
 	local society = GetSociety(_society)
 	amount = DGCore.Math.Round(tonumber(amount))
 	if amount > 0 then
-		TriggerEvent('dg_addonaccount:getSharedAccount', society.account, function(account)
+		TriggerEvent('dg-addonaccount:getSharedAccount', society.account, function(account)
 			account.addMoney(amount)
 		end)
 	end
@@ -104,14 +106,16 @@ AddEventHandler('dg_society:depositMoney', function(_society, amount)
 	amount = DGCore.Math.Round(tonumber(amount))
 	if xPlayer.job.name == society.name then
 		if amount > 0 and xPlayer.getMoney() >= amount then
-			TriggerEvent('dg_addonaccount:getSharedAccount', society.account, function(account)
+			TriggerEvent('dg-addonaccount:getSharedAccount', society.account, function(account)
 				xPlayer.removeMoney(amount)
 				account.addMoney(amount)
 			end)
 
-			xPlayer.showNotification('You have deposited $ '..DGCore.Math.GroupDigits(amount)..' to the society fund.')
+			--xPlayer.showNotification('You have deposited $ '..DGCore.Math.GroupDigits(amount)..' to the society fund.')
+			TriggerClientEvent('DoLongHudText', xPlayer.source, 'you have deposited', amount, 1)
 		else
-			xPlayer.showNotification('Invalid Amount')
+			--xPlayer.showNotification('Invalid Amount')
+			TriggerClientEvent('DoLongHudText', xPlayer.source,'Invalid Amount', 2)
 		end
 	else
 		print(('dg_society: %s attempted to call depositMoney!'):format(xPlayer.identifier))
@@ -121,7 +125,7 @@ end)
 DGCore.RegisterServerCallback('dg_society:getSocietyMoney', function(source, cb, societyName)
 	local society = GetSociety(societyName)
 	if society then
-		TriggerEvent('dg_addonaccount:getSharedAccount', society.account, function(account)
+		TriggerEvent('dg-addonaccount:getSharedAccount', society.account, function(account)
 			cb(account.money)
 		end)
 	else
@@ -202,11 +206,14 @@ DGCore.RegisterServerCallback('dg_society:setJob', function(source, cb, identifi
 		if xTarget then
 			xTarget.setJob(job, grade)
 			if type == 'hire' then
-				xTarget.showNotification('You have been hired by '.. job .. ' | Rank: '..grade)
+				--xTarget.showNotification('You have been hired by '.. job .. ' | Rank: '..grade)
+				TriggerClientEvent('DoLongHudText', xTarget.source, 'you have been hired on', job, 1)
 			elseif type == 'promote' then
-				xTarget.showNotification('You have been promoted | Rank: ' ..grade)
+				--xTarget.showNotification('You have been promoted | Rank: ' ..grade)
+				TriggerClientEvent('DoLongHudText', xTarget.source, 'you have been promoted', 1)
 			elseif type == 'fire' then
-				xTarget.showNotification('You have been fired from '..xTarget.getJob().label)
+				--xTarget.showNotification('You have been fired from '..xTarget.getJob().label)
+				TriggerClientEvent('DoLongHudText', xTarget.source, 'you have been fired from %s', xTarget.getJob().label, 1)
 			end
 			cb()
 		else
