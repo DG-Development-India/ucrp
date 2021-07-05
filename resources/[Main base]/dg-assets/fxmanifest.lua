@@ -13,7 +13,8 @@ client_scripts {
     'propattach.lua',
     'status.lua',
     'heli_client.lua',
-    'gym.lua'
+    'gym.lua',
+    'bossmenu.lua'
 }
 
 server_scripts {
