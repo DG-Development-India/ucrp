@@ -1,16 +1,26 @@
 local beds = {
-    { x = 314.589, y = -584.082, z = 44.204, h = 170.0, taken = false, model = 1631638868 },
-    { x = 311.1046, y = -583.1647, z = 44.204, h = 170.0, taken = false, model = 1631638868 },
-    { x = 317.7204, y = -585.5063, z = 44.204, h = 170.0, taken = false, model = 1631638868 },
-    { x = 322.6154, y = -587.3105, z = 44.204, h = 170.0, taken = false, model = 1631638868 },
-    { x = 319.4153, y = -580.909, z = 44.204, h = -20.0, taken = false, model = 1631638868 },
-    { x = 313.948, y = -578.8614, z = 44.204, h = -20.0, taken = false, model = 1631638868 },
-    { x = 309.2876, y = -577.2015, z = 44.204, h = -20.0, taken = false, model = 1631638868 },
+    { x = 307.64, y = -582.01, z = 42.2, h = 180.00, taken = false, model = 1631638868 },
+    { x = 310.95, y = -583.30, z = 42.2, h = 180.00, taken = false, model = -1091386327 },
+    { x = 314.32, y = -584.22, z = 42.2, h = 180.00, taken = false, model = 1631638868 },
+    { x = 317.71, y = -585.52, z = 42.2, h = 180.00, taken = false, model = -1091386327 }, 
+    { x = 322.74, y = -587.2,  z = 42.2, h = 180.00, taken = false, model = -1091386327 }, 
+    { x = 309.33, y = -577.13, z = 42.2, h = 0.00, taken = false, model = -1091386327 },
+    { x = 313.85, y = -578.92, z = 42.2, h = 0.00, taken = false, model = -1091386327 },
+    { x = 319.32, y = -580.91, z = 42.2, h = 0.00, taken = false, model = -1091386327 },
+    { x = 324.15, y = -582.67, z = 42.2, h = 0.00, taken = false, model = -1091386327 }
 }
 
-
 local bedsTaken = {}
-local injuryBasePrice = 50
+local injuryBasePrice = 100
+DGCore             = nil
+
+TriggerEvent('dg:getSharedObject', function(obj) DGCore = obj end)
+
+AddEventHandler('playerDropped', function()
+    if bedsTaken[source] ~= nil then
+        beds[bedsTaken[source]].taken = false
+    end
+end)
 
 AddEventHandler('playerDropped', function()
     if bedsTaken[source] ~= nil then
@@ -29,7 +39,7 @@ AddEventHandler('dg-hospital:server:RequestBed', function()
         end
     end
 
-    TriggerClientEvent('DoLongHudText',  source, 'No Beds Available', 2)
+    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'No beds available.' })
 end)
 
 RegisterServerEvent('dg-hospital:server:RPRequestBed')
@@ -44,15 +54,29 @@ AddEventHandler('dg-hospital:server:RPRequestBed', function(plyCoords)
                 TriggerClientEvent('dg-hospital:client:RPSendToBed', source, k, v)
                 return
             else
-                TriggerEvent('DoLongHudText', source, 'That bed is taken!', 2)
+                TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'That bed is taken.' })
             end
         end
     end
 
     if not foundbed then
-        TriggerEvent('DoLongHudText', source, 'Not near a hospital bed!', 2)
+        TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'inform', text = 'You are not near a hospital bed.' })
     end
 end)
+
+RegisterServerEvent('dg-hospital:checkems')
+AddEventHandler('dg-hospital:checkems', function()
+	local xPlayers = DGCore.GetPlayers()
+	local ems = 0
+	for i=1, #xPlayers, 1 do
+		local xPlayer = DGCore.GetPlayerFromId(xPlayers[i])
+		if xPlayer.job.name == 'ambulance' then
+			ems = ems + 1
+		end
+	end
+	TriggerClientEvent("dg-hospital:checkems", source, ems)
+end)
+
 
 RegisterServerEvent('dg-hospital:server:EnteredBed')
 AddEventHandler('dg-hospital:server:EnteredBed', function()
@@ -73,15 +97,16 @@ AddEventHandler('dg-hospital:server:EnteredBed', function()
         end
     end
 
-	local _source = source
-    local xPlayer = DGCore.GetPlayerFromId(source)
-    xPlayer.removeAccountMoney('bank', 50)
-    --TriggerServerEvent("dg-base:removeMoney", 50, "You paid 50$!")
-    TriggerClientEvent('chatMessagess', source, 'Service: ', 5, 'It was a success, you have been billed for your injuries in the amount of $' .. totalBill ..'.')
+    -- YOU NEED TO IMPLEMENT YOUR FRAMEWORKS BILLING HERE
+	local xPlayer = DGCore.GetPlayerFromId(src)
+    xPlayer.removeBank(totalBill)
+    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You were billed for $' .. totalBill ..'.' })
     TriggerClientEvent('dg-hospital:client:FinishServices', src)
 end)
 
 RegisterServerEvent('dg-hospital:server:LeaveBed')
 AddEventHandler('dg-hospital:server:LeaveBed', function(id)
-    beds[id].taken = false
+    if id ~= nil then
+        beds[id].taken = false
+    end
 end)

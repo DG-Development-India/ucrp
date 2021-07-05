@@ -45,10 +45,7 @@ DGCore.SetPlayerData = function(key, val)
 end
 
 DGCore.ShowNotification = function(msg)
-	-- SetNotificationTextEntry('STRING')
-	-- AddTextComponentSubstringPlayerName(msg)
-	-- DrawNotification(false, true)
-	exports["mythic_notify"]:DoHudText('inform', msg)	
+	exports['mythic_notify']:SendAlert('inform', msg, 3500, { ['background-color'] = '#007EB5', ['color'] = '#ffffff' })
 end
 
 -- DGCore.ShowAdvancedNotification = function(title, subject, msg, icon, iconType)

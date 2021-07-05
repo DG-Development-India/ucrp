@@ -22,19 +22,19 @@ local bleedMoveNotifId = 'MHOS_BLEEDMOVE'
 local BodyParts = {
     ['HEAD'] = { label = 'Head', causeLimp = false, isDamaged = false, severity = 0 },
     ['NECK'] = { label = 'Neck', causeLimp = false, isDamaged = false, severity = 0 },
-    ['SPINE'] = { label = 'Spine', causeLimp = false, isDamaged = false, severity = 0 },
+    ['SPINE'] = { label = 'Spine', causeLimp = true, isDamaged = false, severity = 0 },
     ['UPPER_BODY'] = { label = 'Upper Body', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LOWER_BODY'] = { label = 'Lower Body', causeLimp = false, isDamaged = false, severity = 0 },
+    ['LOWER_BODY'] = { label = 'Lower Body', causeLimp = true, isDamaged = false, severity = 0 },
     ['LARM'] = { label = 'Left Arm', causeLimp = false, isDamaged = false, severity = 0 },
     ['LHAND'] = { label = 'Left Hand', causeLimp = false, isDamaged = false, severity = 0 },
     ['LFINGER'] = { label = 'Left Hand Fingers', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LLEG'] = { label = 'Left Leg', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LFOOT'] = { label = 'Left Foot', causeLimp = false, isDamaged = false, severity = 0 },
+    ['LLEG'] = { label = 'Left Leg', causeLimp = true, isDamaged = false, severity = 0 },
+    ['LFOOT'] = { label = 'Left Foot', causeLimp = true, isDamaged = false, severity = 0 },
     ['RARM'] = { label = 'Right Arm', causeLimp = false, isDamaged = false, severity = 0 },
     ['RHAND'] = { label = 'Right Hand', causeLimp = false, isDamaged = false, severity = 0 },
     ['RFINGER'] = { label = 'Right Hand Fingers', causeLimp = false, isDamaged = false, severity = 0 },
-    ['RLEG'] = { label = 'Right Leg', causeLimp = false, isDamaged = false, severity = 0 },
-    ['RFOOT'] = { label = 'Right Foot', causeLimp = false, isDamaged = false, severity = 0 },
+    ['RLEG'] = { label = 'Right Leg', causeLimp = true, isDamaged = false, severity = 0 },
+    ['RFOOT'] = { label = 'Right Foot', causeLimp = true, isDamaged = false, severity = 0 },
 }
 
 local injured = {}
@@ -94,7 +94,8 @@ function ProcessRunStuff(ped)
         if wasOnPainKillers then
             SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
             wasOnPainKillers = false
-            exports['mythic_notify']:SendAlert('inform', 'You Suddenly Black Out!', 3000, { ['background-color'] = '#000000', ['color'] = '#FFFFFF' })
+            TriggerEvent('DoLongHudText', 'You Suddenly Black Out', 1)
+            TriggerEvent('DoLongHudText', 'You\'ve Realized Doing Drugs Does Not Fix All Your Problems', 1)
         end
     else
         SetPedMoveRateOverride(ped, 1.0)
@@ -117,13 +118,13 @@ function ProcessDamage(ped)
                         local chance = math.random(100)
                         if (IsPedRunning(ped) or IsPedSprinting(ped)) then
                             if chance <= Config.LegInjuryChance.Running then
-                                exports['mythic_notify']:SendAlert('inform', 'You\'re Having A Hard Time Running', 3000, { ['background-color'] = '#E60054', ['color'] = '#FFFFFF' })
+                                TriggerEvent('DoLongHudText', 'You\'re Having A Hard Time Running', 1)
                                 ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
                                 SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
                             end
                         else
                             if chance <= Config.LegInjuryChance.Walking then
-                                exports['mythic_notify']:SendAlert('inform', 'You\'re Having A Hard Using Your Legs', 3000, { ['background-color'] = '#E60054', ['color'] = '#FFFFFF' })
+                                TriggerEvent('DoLongHudText', 'You\'re Having A Hard Using Your Legs', 1)
                                 ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
                                 SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
                             end
@@ -180,7 +181,7 @@ function ProcessDamage(ped)
                     local chance = math.random(100)
 
                     if chance <= Config.HeadInjuryChance then
-                        exports['mythic_notify']:SendAlert('inform', 'You Suddenly Black Out!', 3000, { ['background-color'] = '#000000', ['color'] = '#FFFFFF' })
+                        TriggerEvent('DoLongHudText', 'You Suddenly Black Out', 1)
                         SetFlash(0, 0, 100, 10000, 100)
                         
                         DoScreenFadeOut(100)
@@ -190,10 +191,10 @@ function ProcessDamage(ped)
 
                         if not IsPedRagdoll(ped) and IsPedOnFoot(ped) and not IsPedSwimming(ped) then
                             ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-                            SetPedToRagdoll(ped, 3000, 1, 2)
+                            SetPedToRagdoll(ped, 5000, 1, 2)
                         end
 
-                        Citizen.Wait(3000)
+                        Citizen.Wait(5000)
                         DoScreenFadeIn(250)
                     end
                     headCount = 0
@@ -206,6 +207,7 @@ function ProcessDamage(ped)
         if wasOnDrugs then
             SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
             wasOnDrugs = false
+            TriggerEvent('DoLongHudText', 'You\'ve Realized Doing Drugs Does Not Fix All Your Problems', 1)
         end
     else
         onDrugs = onDrugs - 1
@@ -229,11 +231,11 @@ function CheckDamage(ped, bone, weapon)
                     if GetPedArmour(ped) > 0 then
                         local chance = math.random(100)
                         if chance <= math.ceil(Config.BodyArmorStaggerChance / 2) then
-                        --    SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
                         end
                     else
                         if Config.Bones[bone] == 'SPINE' then
-                         --   SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
                         end
     
                         ApplyBleed(1)
@@ -246,7 +248,7 @@ function CheckDamage(ped, bone, weapon)
                     if GetPedArmour(ped) > 0 then
                         local chance = math.random(100)
                         if chance <= math.ceil(Config.BodyArmorStaggerChance) then
-                          --  SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
                         end
 
                         if isBleeding < 1 then
@@ -257,7 +259,7 @@ function CheckDamage(ped, bone, weapon)
                         end
                     else
                         if Config.Bones[bone] == 'SPINE' then
-                         --   SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
                         end
                         ApplyBleed(2)
                     end
@@ -286,11 +288,11 @@ function CheckDamage(ped, bone, weapon)
                     if GetPedArmour(ped) > 0 then
                         local chance = math.random(100)
                         if chance <= math.ceil(Config.BodyArmorStaggerChance / 2) then
-                         --   SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
                         end
                     else
                         if Config.Bones[bone] == 'SPINE' then
-                          --  SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
+                            SetPedToRagdoll(ped, 1500, 2000, 2, true, true, false)
                         end
     
                         ApplyBleed(1)
@@ -303,7 +305,7 @@ function CheckDamage(ped, bone, weapon)
                     if GetPedArmour(ped) > 0 then
                         local chance = math.random(100)
                         if chance <= math.ceil(Config.BodyArmorStaggerChance) then
-                         --   SetPedToRagdoll(PlayerPedId(), 1500, 2000, 3, true, true, false)
+                            SetPedToRagdoll(PlayerPedId(), 1500, 2000, 3, true, true, false)
                         end
 
                         if isBleeding < 1 then
@@ -314,7 +316,7 @@ function CheckDamage(ped, bone, weapon)
                         end
                     else
                         if Config.Bones[bone] == 'SPINE' then
-                        --    SetPedToRagdoll(PlayerPedId(), 1500, 2000, 3, true, true, false)
+                            SetPedToRagdoll(PlayerPedId(), 1500, 2000, 3, true, true, false)
                         end
     
                         ApplyBleed(2)
@@ -354,7 +356,6 @@ function ApplyBleed(level)
             isBleeding = isBleeding + level
         end
     end
-    TriggerEvent('evidence:bleeding')
 end
 
 function DoLimbAlert()
@@ -369,11 +370,13 @@ function DoLimbAlert()
                         limbDamageMsg = limbDamageMsg .. ' | '
                     end
                 end
+            elseif #injured > 2 then
+                limbDamageMsg = 'You Feel Multiple Pains'
             else
                 limbDamageMsg = 'Your ' .. injured[1].label .. ' feels ' .. Config.WoundStates[injured[1].severity]
             end
     
-            exports['mythic_notify']:SendAlert('inform', limbDamageMsg, 3000, { ['background-color'] = '#E60054', ['color'] = '#FFFFFF' })
+            TriggerEvent('DoLongHudText', limbDamageMsg, 1)
         else
             Citizen.Wait(1)
         end
@@ -385,7 +388,7 @@ end
 function DoBleedAlert()
     local player = PlayerPedId()
     if not IsEntityDead(player) and isBleeding > 0 then
-        exports['mythic_notify']:SendAlert('inform', 'You Have ' .. Config.BleedingStates[isBleeding], 1500, { ['background-color'] = '#E60054', ['color'] = '#FFFFFF' })
+        TriggerEvent('DoLongHudText', 'You Have ' .. Config.BleedingStates[isBleeding])
     else
         Citizen.Wait(1)
     end
@@ -573,7 +576,7 @@ Citizen.CreateThread(function()
                 local currPos = GetEntityCoords(player, true)
                 local moving = #(vector2(prevPos.x, prevPos.y) - vector2(currPos.x, currPos.y))
                 if (moving > 1) and isBleeding > 2 then
-                    TriggerEvent('DoLongHudText', 'Blood oozing faster as you move', 2)
+                    TriggerEvent('DoLongHudText', 'You notice blood oozing from your wounds faster when you\'re moving', 1)
                     advanceBleedTimer = advanceBleedTimer + Config.BleedMovementAdvance
                     bleedTickTimer = bleedTickTimer + Config.BleedMovementTick
                     prevPos = currPos

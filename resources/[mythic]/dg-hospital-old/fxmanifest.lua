@@ -1,27 +1,15 @@
-fx_version 'adamant'
-
-game 'gta5'
-
-description 'Mythic Framework Hospital & Damage System'
-
-version '1.1.0'
-
 client_scripts {
 	'config.lua',
 	'client/wound.lua',
 	'client/main.lua',
 	'client/items.lua',
+	'client/bed_c',
 }
 
 server_scripts {
 	'server/wound.lua',
 	'server/main.lua',
 	'server/items.lua',
-}
-
-dependencies {
-	'mythic_progbar',
-	'mythic_notify',
 }
 
 exports {
@@ -33,3 +21,6 @@ exports {
 server_exports {
     'GetCharsInjuries',
 }
+
+fx_version 'adamant'
+games { 'gta5' }
