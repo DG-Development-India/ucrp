@@ -145,10 +145,13 @@ function OpenDMVSchoolMenu()
 		elements = elements,
 		align    = 'bottom-right'
 	}, function(data, menu)
-		if data.current.value == 'theory_test' then
-			menu.close()
-			StartTheoryTest()
-		elseif data.current.value == 'drive_test' then
+		-- if data.current.value == 'theory_test' then
+		-- 	menu.close()
+		-- 	StartTheoryTest()
+		-- elseif data.current.value == 'drive_test' then
+		-- 	StartDriveTest(data.current.type)
+		-- end
+		if data.current.value == 'drive_test' then
 			StartDriveTest(data.current.type)
 		end
 	end, function(data, menu)
