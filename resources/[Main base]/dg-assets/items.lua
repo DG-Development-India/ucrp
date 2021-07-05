@@ -1804,7 +1804,7 @@ AddEventHandler('ammo:pistol', function()
                     
                     TriggerEvent("mythic_progbar:client:progress", {
                         name = "Reloading the pistol",
-                        duration = 5000,
+                        duration = 3000,
                         label = "Reloading the pistol",
                         useWhileDead = false,
                         canCancel = false,
@@ -1860,7 +1860,7 @@ AddEventHandler('ammo:smg', function()
                     TriggerEvent("inventory:removeItem",'subammo', 1)
                     TriggerEvent("mythic_progbar:client:progress", {
                         name = "Reloading the SMG",
-                        duration = 5000,
+                        duration = 3000,
                         label = "Reloading the SMG",
                         useWhileDead = false,
                         canCancel = false,
@@ -1913,7 +1913,7 @@ AddEventHandler('ammo:rifle', function()
                     TriggerEvent("inventory:removeItem",'rifleammo', 1)
                     TriggerEvent("mythic_progbar:client:progress", {
                         name = "Reloading the rifle",
-                        duration = 5000,
+                        duration = 3000,
                         label = "Reloading the rifle",
                         useWhileDead = false,
                         canCancel = false,
@@ -1968,7 +1968,7 @@ AddEventHandler('ammo:shotgun', function()
                 if pedAmmo < 150 then
                     TriggerEvent("mythic_progbar:client:progress", {
                         name = "Reloading the shotgun",
-                        duration = 5000,
+                        duration = 3000,
                         label = "Reloading the shotgun",
                         useWhileDead = false,
                         canCancel = false,
