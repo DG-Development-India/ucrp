@@ -31,7 +31,7 @@ local face_features = {"Nose_Width","Nose_Peak_Hight","Nose_Peak_Lenght","Nose_B
 local tatCategory = GetTatCategs()
 local tattooHashList = CreateHashList()
 
-local StoreCost = 0;
+local StoreCost = 50;
 local isService = false;
 
 
@@ -830,7 +830,7 @@ function OpenMenu(name)
     oldPed = GetCurrentPed()
     local isAllowed = false
     if(oldPed.model == 1885233650 or oldPed.model == -1667301416) then isAllowed = true end
-    if((oldPed.model ~= 1885233650 or oldPed.model ~= -1667301416) and (name == "clothesmenu" or name == "tattoomenu" or name == "healmenu" or name == "clothesm")) then isAllowed = true end
+    if((oldPed.model ~= 1885233650 or oldPed.model ~= -1667301416) and (name == "clothesmenu" or name == "tattoomenu" or name == "healmenu" or name == "clothesm" or name == "barbermenu")) then isAllowed = true end
     if isAllowed then
         FreezePedCameraRotation(player, true)
         RefreshUI()

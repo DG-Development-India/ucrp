@@ -23,12 +23,12 @@ TokoVoipConfig = {
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
 		
-		TSChannel = "In-City",
+		TSChannel = "IN GAME",
 		TSPassword = "9815102677", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
 		-- If the TSChannel is public and people can join directly, you can leave this empty and not use the auto-move
-		TSChannelWait = "Lobby",
+		TSChannelWait = "IN LOBBY",
 
 		-- Blocking screen informations
 		TSServer = "ts.playlethal.com", -- TeamSpeak server address to be displayed on blocking screen

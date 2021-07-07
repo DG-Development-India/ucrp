@@ -1008,7 +1008,7 @@ end)
 
 -- Cycle Rent
 
-local cycle = {x = -1034.1, y = -2732.98, z = 20.17}
+local cycle = {x = -1759.786, y = -760.475, z = 9.636102}
 
 Citizen.CreateThread(function()
     

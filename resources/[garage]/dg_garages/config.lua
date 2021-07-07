@@ -34,18 +34,18 @@ Config.ambulance= {
 
 
 Config.PoliceVehicles = {
-	{ model = 'pbike', label = 'Police Bicycle'},
-	{ model = 'policeb', label = 'Police Bike'},
-	{ model = 'pol8', label = 'Police BMW Bike'},
-	{ model = 'code3harley', label = 'Police Harley'},
-	{ model = 'pol1', label = 'Crown Victoria'},
-	{ model = 'poltaurus', label = 'Ford Taurus'},
-	{ model = 'police2', label = 'Dodge Charger'},
-	{ model = 'poltah', label = 'Chevi Tahoe'},
-	{ model = 'polraptor', label = 'Ford Raptor'},
-	{ model = '2015polstang', label = 'Ford Mustang'},
-	{ model = 'polschafter3', label = 'Schafter'},
-	{ model = 'pbus2', label = 'Prison Bus'},
+	{ model = '14charger', label = '2014 Charger'},
+	{ model = '18charger', label = '2018 charger'},
+	{ model = 'f150', label = 'Raptor Ford'},
+	{ model = 'fpis', label = 'Ford Setina'},
+	{ model = 'fpiu', label = 'Ford Explorer'},
+	{ model = 'tahoe', label = 'Tahoe'},
+	{ model = 'policeb1', label = 'Hayabusa'},
+	{ model = 'fbi3', label = 'Mcgarrets Mercedes Sprinter Van'},
+	{ model = 'rmodfordpolice', label = ' Mustang'},
+	{ model = 'policeatvrb', label = ' ATV'},
+	{ model = 'bmwbike', label = 'BMW Bike'},
+	{ model = 's11mg', label = 'Scorpio'},
 	{ model = 'riot', label = 'Riot Van' },
 }
 

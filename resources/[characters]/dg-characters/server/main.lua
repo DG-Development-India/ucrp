@@ -74,7 +74,7 @@ AddEventHandler('kashactersS:CharacterChosen', function(charid, ischar, spawnid)
             TriggerClientEvent('updatecid', src, GetPlayerIdentifiers(src)[1])
         else --default spawn mode
 
-            spawn = {  x = -1042.094, y = -2745.758, z = 21.3594 } -- DEFAULT SPAWN POSITION -- EDIT THIS
+            spawn = {  x = -1776.491, y = -777.4518, z = 9.004488 } -- DEFAULT SPAWN POSITION -- EDIT THIS -- india gate
             TriggerClientEvent("kashactersC:SpawnCharacter", src, spawn,true)
         end
     end

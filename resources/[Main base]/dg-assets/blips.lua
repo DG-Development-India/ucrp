@@ -53,7 +53,7 @@ local blips = {
 	 --{name="Downtown Cab Co.", color=5, id=56, x=903.9481, y=-173.5247, z=74.0756},
 	 --{name="Bean Machine",color=10, id=106, x = -632.64, y = 235.25, z = 81.89},
 	 {name="Police Department",color=38, id=60, x = 454.6035, y = -983.9653, z = 30.68951},
-	 --{name="Pillbox Hospital",color=38, id=153, x = 323.2469, y = -592.575, z = 43.28399}
+	 {name="India Gate",color=1, id=176, x = -1776.491, y = -777.4518, z = 9.004488}
 }
 
 Citizen.CreateThread(function()

@@ -181,7 +181,7 @@ Citizen.CreateThread(function()
 						
 						local hash = GetHashKey(b.model)
 						local car = GetDisplayNameFromVehicleModel(hash)
-						DrawText3Ds(pos.x, pos.y, pos.z + 1.3, "[ ~g~" .. car .. " ~s~] | [~r~ $" .. b.price .. " ~s~]\n" .. "[ ~g~E~s~ ] | [ ~w~BUY~s~ ] | [ ~g~G~s~ ] | [ ~w~ Swap~s~ ]")
+						DrawText3Ds(pos.x, pos.y, pos.z + 1.3, "[ ~g~" .. car .. " ~s~] | [~r~ $" .. b.price .. " ~s~]\n" .. " [ ~g~G~s~ ] | [ ~w~ Swap~s~ ]")
 						
 						if myjob then
 
@@ -231,88 +231,88 @@ Citizen.CreateThread(function()
 							pressed  =	false
 						end
 						
-						if IsControlPressed(0,38) and not pressed then
-							pressed = true
-							if DGCore.Game.IsSpawnPointClear(buypoint, 5) then
-								local price = b.price * 1.15
-								price = math.floor(price+0.5)
-								local elements = {}
-								local clickedbuy = false
-								table.insert(elements, {label = 'No (Buy from PDM)',  value = 'no'})
-								table.insert(elements, {label = 'Buy for $'.. price ..' (15% Extra)' , value = 'yes'})
-								DGCore.UI.Menu.CloseAll()
-								DGCore.UI.Menu.Open('default', GetCurrentResourceName(), 'Buy_vehicle', {
-									title    = 'Buy '.. b.model ..' for $' .. b.price .. '?',
-									align	= 'top-right',
-									elements = elements,
-								}, function(data, menu)
-									if data.current.value == 'no' then
-										menu.close()
-										pressed = false
-									elseif data.current.value == 'yes' then
-										if not buyingd then
-											buyingd = true
-											menu.close()
-											DGCore.UI.Menu.CloseAll()
-											DGCore.TriggerServerCallback('ndrp_pdm:checkStock', function(cb)
-												if cb.stock > 0 then
-													DGCore.TriggerServerCallback('ndrp_pdm:checkmoney', function(hM)
-														if hM then
-															local generatedPlate = GeneratePlate()
-															Citizen.Wait(50)
-															RequestModel(b.model)
-															while not HasModelLoaded(b.model) do
-																Wait(10)
-															end
-															local buyveh  = CreateVehicle(hash, buypoint, buyheading, true, true)
-															Citizen.Wait(20)
-															SetVehicleNumberPlateText(buyveh, generatedPlate)
-															Citizen.Wait(50)
-															local vehicleProps = DGCore.Game.GetVehicleProperties(buyveh)
-															print(vehicleProps.plate)
-															Citizen.Wait(20)
-															if not clickedbuy then
-																clickedbuy = true
-																TriggerServerEvent('ndrp_pdm:buycar',  vehicleProps, price, true,0,0,0,b.model,b.price,0,b.slot)	
-															end
-															--TriggerEvent('ndrp_carkeys:carkeys',buyveh)
-															local pl = GetVehicleNumberPlateText(buyveh)
-															TriggerServerEvent('garage:addKeys', pl)
-															TaskWarpPedIntoVehicle(ped, buyveh, -1)
-															local migid = NetworkGetNetworkIdFromEntity(buyveh)
-															SetNetworkIdCanMigrate(migid,true)
-															pressed = false
-														else
-															exports['mythic_notify']:SendAlert('error', 'You don\'t have enough cash')
-															Citizen.Wait(1000)
-															pressed = false
-															menu.close()
-														end
-													end, price)
-												else
-													exports['mythic_notify']:SendAlert('error', 'This car is out of Stock! Contact PDM Manager.')
-													Citizen.Wait(1000)
-													pressed = false
-													menu.close()
-												end
-											end, b.model)
-											buyingd = false
-											pressed = false
-										else
-											menu.close()
-											buyingd = false
-										end
-									end
-								end, function(data, menu)
-									pressed = false
-									menu.close()
-								end)
-							else
-								exports['mythic_notify']:SendAlert('inform', 'Please clear the spawn spoint!')
-								Citizen.Wait(2000)
-								pressed = false
-							end
-						end
+						-- if IsControlPressed(0,38) and not pressed then
+						-- 	pressed = true
+						-- 	if DGCore.Game.IsSpawnPointClear(buypoint, 5) then
+						-- 		local price = b.price * 1.15
+						-- 		price = math.floor(price+0.5)
+						-- 		local elements = {}
+						-- 		local clickedbuy = false
+						-- 		table.insert(elements, {label = 'No (Buy from PDM)',  value = 'no'})
+						-- 		table.insert(elements, {label = 'Buy for $'.. price ..' (15% Extra)' , value = 'yes'})
+						-- 		DGCore.UI.Menu.CloseAll()
+						-- 		DGCore.UI.Menu.Open('default', GetCurrentResourceName(), 'Buy_vehicle', {
+						-- 			title    = 'Buy '.. b.model ..' for $' .. b.price .. '?',
+						-- 			align	= 'top-right',
+						-- 			elements = elements,
+						-- 		}, function(data, menu)
+						-- 			if data.current.value == 'no' then
+						-- 				menu.close()
+						-- 				pressed = false
+						-- 			elseif data.current.value == 'yes' then
+						-- 				if not buyingd then
+						-- 					buyingd = true
+						-- 					menu.close()
+						-- 					DGCore.UI.Menu.CloseAll()
+						-- 					DGCore.TriggerServerCallback('ndrp_pdm:checkStock', function(cb)
+						-- 						if cb.stock > 0 then
+						-- 							DGCore.TriggerServerCallback('ndrp_pdm:checkmoney', function(hM)
+						-- 								if hM then
+						-- 									local generatedPlate = GeneratePlate()
+						-- 									Citizen.Wait(50)
+						-- 									RequestModel(b.model)
+						-- 									while not HasModelLoaded(b.model) do
+						-- 										Wait(10)
+						-- 									end
+						-- 									local buyveh  = CreateVehicle(hash, buypoint, buyheading, true, true)
+						-- 									Citizen.Wait(20)
+						-- 									SetVehicleNumberPlateText(buyveh, generatedPlate)
+						-- 									Citizen.Wait(50)
+						-- 									local vehicleProps = DGCore.Game.GetVehicleProperties(buyveh)
+						-- 									print(vehicleProps.plate)
+						-- 									Citizen.Wait(20)
+						-- 									if not clickedbuy then
+						-- 										clickedbuy = true
+						-- 										TriggerServerEvent('ndrp_pdm:buycar',  vehicleProps, price, true,0,0,0,b.model,b.price,0,b.slot)	
+						-- 									end
+						-- 									--TriggerEvent('ndrp_carkeys:carkeys',buyveh)
+						-- 									local pl = GetVehicleNumberPlateText(buyveh)
+						-- 									TriggerServerEvent('garage:addKeys', pl)
+						-- 									TaskWarpPedIntoVehicle(ped, buyveh, -1)
+						-- 									local migid = NetworkGetNetworkIdFromEntity(buyveh)
+						-- 									SetNetworkIdCanMigrate(migid,true)
+						-- 									pressed = false
+						-- 								else
+						-- 									exports['mythic_notify']:SendAlert('error', 'You don\'t have enough cash')
+						-- 									Citizen.Wait(1000)
+						-- 									pressed = false
+						-- 									menu.close()
+						-- 								end
+						-- 							end, price)
+						-- 						else
+						-- 							exports['mythic_notify']:SendAlert('error', 'This car is out of Stock! Contact PDM Manager.')
+						-- 							Citizen.Wait(1000)
+						-- 							pressed = false
+						-- 							menu.close()
+						-- 						end
+						-- 					end, b.model)
+						-- 					buyingd = false
+						-- 					pressed = false
+						-- 				else
+						-- 					menu.close()
+						-- 					buyingd = false
+						-- 				end
+						-- 			end
+						-- 		end, function(data, menu)
+						-- 			pressed = false
+						-- 			menu.close()
+						-- 		end)
+						-- 	else
+						-- 		exports['mythic_notify']:SendAlert('inform', 'Please clear the spawn spoint!')
+						-- 		Citizen.Wait(2000)
+						-- 		pressed = false
+						-- 	end
+						-- end
 					end
 				end
 			end
